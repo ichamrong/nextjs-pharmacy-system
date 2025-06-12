@@ -8,8 +8,22 @@ import { MobileAlert } from "@/components/mobile-alert";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Pharmacy System",
-  description: "Modern Pharmacy Management System",
+  title: "Pharmacy Management System",
+  description: "A comprehensive pharmacy management system for managing inventory, sales, and customer data.",
+  icons: {
+    icon: [
+      {
+        url: '/pharmacy-icon.svg',
+        type: 'image/svg+xml',
+      }
+    ],
+    apple: [
+      {
+        url: '/pharmacy-icon.svg',
+        type: 'image/svg+xml',
+      }
+    ],
+  },
 };
 
 export default async function RootLayout({

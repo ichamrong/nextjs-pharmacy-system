@@ -57,19 +57,16 @@
 
   body {
     @apply bg-background text-foreground;
-    /* Use Poppins as primary font with Battambang as fallback for Khmer */
-    font-family: 'Poppins', 'Battambang', sans-serif !important;
+    font-family: var(--font-poppins);
   }
 
-  /* Automatic language-based font selection */
-  :lang(km), /* Khmer language code */
+  /* Language-specific font settings */
   [lang="km"] {
-    font-family: 'Poppins', 'Battambang', sans-serif !important;
+    font-family: var(--font-khmer) !important;
   }
 
-  :lang(en), /* English language code */
   [lang="en"] {
-    font-family: 'Battambang', 'Poppins', sans-serif !important;
+    font-family: var(--font-poppins) !important;
   }
 
   /* Unicode range based font selection for Khmer characters */
@@ -78,25 +75,16 @@
     src: local('Battambang');
     unicode-range: U+1780-17FF, U+19E0-19FF; /* Khmer Unicode ranges */
   }
-
-  /* Apply KhmerText for Khmer characters specifically */
-  * {
-    font-family: 'Poppins', 'KhmerText', 'Battambang', sans-serif;
-  }
 }
 
 /* Utility classes for manual font selection */
 @layer utilities {
   .font-khmer {
-    font-family: 'Battambang', sans-serif !important;
+    font-family: var(--font-khmer) !important;
   }
 
   .font-english {
-    font-family: 'Poppins', sans-serif !important;
-  }
-
-  .font-mixed {
-    font-family: 'Poppins', 'Battambang', sans-serif !important;
+    font-family: var(--font-poppins) !important;
   }
 }
 

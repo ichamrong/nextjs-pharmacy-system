@@ -6,9 +6,25 @@
     "password": "Password",
     "rememberMe": "Remember me",
     "forgotPassword": "Forgot password?",
-    "signInButton": "Sign in",
+    "signInButton": "Sign In",
     "noAccount": "Don't have an account?",
-    "contactAdmin": "Contact Admin"
+    "contactAdmin": "Contact Admin",
+    "contactAdminDescription": "If you need access to the system, please contact your administrator.",
+    "contactInfo": "Contact Information",
+    "emailAdmin": "Email Admin",
+    "phoneAdmin": "Phone Admin",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "ok": "OK",
+    "back": "Back",
+    "save": "Save",
+    "saving": "Saving...",
+    "error": "Error",
+    "yes": "Yes",
+    "no": "No",
+    "actions": "Actions",
+    "edit": "Edit",
+    "loading": "Loading..."
   },
   "resetPassword": {
     "title": "Reset Password",
@@ -40,8 +56,8 @@
     "salesDescription": "View your sales performance over time",
     "chartPlaceholder": "Sales chart will be displayed here",
     "recentActivity": "Recent Activity",
-    "activityDescription": "Latest updates and changes in your system",
-    "activityItem": "New order #1234 was placed",
+    "activityDescription": "Latest updates and activities in your pharmacy",
+    "activityItem": "New order received",
     "activityTime": "2 minutes ago"
   },
   "admin": {
@@ -57,5 +73,159 @@
   "mobile": {
     "title": "Desktop Only",
     "description": "This web application is optimized for tablet and desktop screens. Please download our mobile app for the best experience on your device."
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your pharmacy system settings",
+    "saveChanges": "Save Changes",
+    "general": "General",
+    "notifications": "Notifications",
+    "security": "Security",
+    "backup": "Backup",
+    "pharmacyInfo": "Pharmacy Information",
+    "pharmacyInfoDescription": "Update your pharmacy's basic information",
+    "pharmacyName": "Pharmacy Name",
+    "pharmacyNamePlaceholder": "Enter pharmacy name",
+    "pharmacyEmail": "Email Address",
+    "pharmacyEmailPlaceholder": "Enter email address",
+    "pharmacyPhone": "Phone Number",
+    "pharmacyPhonePlaceholder": "Enter phone number",
+    "pharmacyAddress": "Address",
+    "pharmacyAddressPlaceholder": "Enter pharmacy address",
+    "displaySettings": "Display Settings",
+    "displaySettingsDescription": "Customize how the system looks",
+    "darkMode": "Dark Mode",
+    "darkModeDescription": "Switch between light and dark theme",
+    "compactMode": "Compact Mode",
+    "compactModeDescription": "Reduce spacing for a more compact view",
+    "emailNotifications": "Email Notifications",
+    "emailNotificationsDescription": "Configure your email notification preferences",
+    "lowStockAlerts": "Low Stock Alerts",
+    "lowStockAlertsDescription": "Get notified when products are running low",
+    "orderNotifications": "Order Notifications",
+    "orderNotificationsDescription": "Receive notifications for new orders",
+    "systemUpdates": "System Updates",
+    "systemUpdatesDescription": "Stay informed about system updates and maintenance",
+    "passwordSettings": "Password Settings",
+    "passwordSettingsDescription": "Update your account password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "twoFactorAuth": "Two-Factor Authentication",
+    "twoFactorAuthDescription": "Add an extra layer of security to your account",
+    "enable2FA": "Enable 2FA",
+    "enable2FADescription": "Use an authenticator app for additional security",
+    "backupSettings": "Backup Settings",
+    "backupSettingsDescription": "Configure your system backup preferences",
+    "backupFrequency": "Backup Frequency",
+    "selectFrequency": "Select frequency",
+    "hourly": "Hourly",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "autoBackup": "Automatic Backup",
+    "autoBackupDescription": "Enable automatic system backups",
+    "createBackup": "Create Backup Now"
+  },
+  "products": {
+    "title": "Products",
+    "description": "Manage your pharmacy products",
+    "productList": "Product List",
+    "addProduct": "Add Product",
+    "addNew": "Add New Product",
+    "searchPlaceholder": "Search products...",
+    "name": "Product Name",
+    "category": "Category",
+    "price": "Price",
+    "stock": "Stock",
+    "status": "Status",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "statusTypes": {
+      "inStock": "In Stock",
+      "lowStock": "Low Stock",
+      "outOfStock": "Out of Stock"
+    },
+    "deleteConfirm": {
+      "title": "Delete Product",
+      "description": "Are you sure you want to delete this product? This action cannot be undone."
+    },
+    "deleteSuccess": {
+      "title": "Success",
+      "message": "Product has been deleted successfully"
+    },
+    "namePlaceholder": "Enter product name",
+    "selectCategory": "Select category",
+    "pricePlaceholder": "Enter price",
+    "stockPlaceholder": "Enter stock quantity",
+    "addSuccess": {
+      "title": "Success",
+      "message": "Product has been added successfully"
+    },
+    "addError": {
+      "message": "Failed to add product. Please try again."
+    },
+    "cancelConfirm": {
+      "title": "Discard Changes?",
+      "message": "You have unsaved changes. Are you sure you want to discard them?"
+    },
+    "notFound": "Product not found",
+    "fetchError": "Failed to fetch product data",
+    "updateSuccess": {
+      "title": "Success",
+      "message": "Product updated successfully"
+    },
+    "updateError": {
+      "message": "Failed to update product"
+    }
+  },
+  "users": {
+    "title": "Users",
+    "addNew": "Add New User",
+    "edit": "Edit User",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status",
+    "searchPlaceholder": "Search users...",
+    "namePlaceholder": "Enter name",
+    "emailPlaceholder": "Enter email",
+    "selectRole": "Select role",
+    "selectStatus": "Select status",
+    "roles": {
+      "admin": "Administrator",
+      "pharmacist": "Pharmacist",
+      "cashier": "Cashier"
+    },
+    "statusTypes": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "notFound": "User not found",
+    "fetchError": "Failed to fetch user data",
+    "updateSuccess": {
+      "title": "Success",
+      "message": "User updated successfully"
+    },
+    "updateError": {
+      "message": "Failed to update user"
+    },
+    "cancelConfirm": {
+      "title": "Discard Changes?",
+      "message": "Are you sure you want to discard your changes?"
+    },
+    "deleteConfirm": {
+      "title": "Delete User",
+      "message": "Are you sure you want to delete this user? This action cannot be undone."
+    },
+    "deleteSuccess": {
+      "title": "Success",
+      "message": "User has been deleted successfully"
+    },
+    "deleteError": {
+      "title": "Error",
+      "message": "Failed to delete user. Please try again."
+    }
   }
 } 

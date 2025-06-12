@@ -1,8 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import enTranslations from '@/i18n/locales/en.json';
-import kmTranslations from '@/i18n/locales/km.json';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import enTranslations from "@/i18n/locales/en.json";
+import kmTranslations from "@/i18n/locales/km.json";
 
 type Language = "en" | "km";
 
@@ -17,20 +17,13 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
 
-// Load translations from files
-const translations: Record<Language, typeof enTranslations> = {
-  en: enTranslations,
-  km: kmTranslations
-};
-
-type TranslationValue = string | { [key: string]: TranslationValue };
-
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>("en");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('preferred-language') as Language;
+    // Load saved language preference from localStorage
+    const savedLanguage = localStorage.getItem("language") as Language;
     if (savedLanguage) {
       setLanguage(savedLanguage);
     }
@@ -46,30 +39,36 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   }, [language]);
 
-  const t = (key: string): string => {
-    if (isLoading) return '';
-    
-    const keys = key.split('.');
-    let value: TranslationValue = translations[language];
-    
-    for (const k of keys) {
-      if (value && typeof value === 'object') {
-        value = value[k];
-      } else {
-        return key;
-      }
-    }
-    
-    return typeof value === 'string' ? value : key;
-  };
-
   const handleSetLanguage = (lang: Language) => {
     setLanguage(lang);
-    localStorage.setItem('preferred-language', lang);
+    localStorage.setItem("language", lang);
+  };
+
+  const t = (key: string): string => {
+    const translations = language === "en" ? enTranslations : kmTranslations;
+    const keys = key.split(".");
+    let value: Record<string, unknown> = translations;
+
+    for (const k of keys) {
+      if (value && typeof value === "object" && k in value) {
+        value = value[k] as Record<string, unknown>;
+      } else {
+        return key; // Return the key if translation is not found
+      }
+    }
+
+    return typeof value === "string" ? value : key;
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t, isLoading }}>
+    <LanguageContext.Provider
+      value={{
+        language,
+        setLanguage: handleSetLanguage,
+        t,
+        isLoading,
+      }}
+    >
       {children}
     </LanguageContext.Provider>
   );

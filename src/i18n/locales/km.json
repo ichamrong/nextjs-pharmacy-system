@@ -8,7 +8,27 @@
     "forgotPassword": "ភ្លេចពាក្យសម្ងាត់?",
     "signInButton": "ចូល",
     "noAccount": "មិនមានគណនីទេ?",
-    "contactAdmin": "ទាក់ទងអ្នកគ្រប់គ្រង"
+    "contactAdmin": "ទាក់ទងអ្នកគ្រប់គ្រង",
+    "resetPassword": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
+    "resetPasswordDescription": "បញ្ចូលអាសយដ្ឋានអ៊ីមែលរបស់អ្នក ហើយយើងនឹងផ្ញើតំណភ្ជាប់ឱ្យអ្នកកំណត់ពាក្យសម្ងាត់ឡើងវិញ។",
+    "sendResetLink": "ផ្ញើតំណភ្ជាប់កំណត់ឡើងវិញ",
+    "backToSignIn": "ត្រឡប់ទៅចូល",
+    "contactAdminDescription": "ប្រសិនបើអ្នកត្រូវការចូលប្រើប្រព័ន្ធ សូមទាក់ទងអ្នកគ្រប់គ្រងរបស់អ្នក។",
+    "contactInfo": "ព័ត៌មានទំនាក់ទំនង",
+    "emailAdmin": "អ៊ីមែលអ្នកគ្រប់គ្រង",
+    "phoneAdmin": "ទូរស័ព្ទអ្នកគ្រប់គ្រង",
+    "cancel": "បោះបង់",
+    "delete": "លុប",
+    "ok": "យល់ព្រម",
+    "back": "ត្រឡប់ក្រោយ",
+    "save": "រក្សាទុក",
+    "saving": "កំពុងរក្សាទុក...",
+    "error": "កំហុស",
+    "yes": "បាទ/ចាស",
+    "no": "ទេ",
+    "actions": "សកម្មភាព",
+    "edit": "កែប្រែ",
+    "loading": "កំពុងផ្ទុក..."
   },
   "resetPassword": {
     "title": "កំណត់ពាក្យសម្ងាត់ឡើងវិញ",
@@ -57,5 +77,158 @@
   "mobile": {
     "title": "សម្រាប់តែកុំព្យូទ័រ",
     "description": "កម្មវិធីវេបនេះត្រូវបានបង្កើតសម្រាប់អេក្រង់តាប្លេត និងកុំព្យូទ័រ។ សូមទាញយកកម្មវិធីទូរសព្ទចល័តរបស់យើងសម្រាប់បទពិសោធន៍ល្អបំផុតនៅលើឧបករណ៍របស់អ្នក។"
+  },
+  "settings": {
+    "title": "ការកំណត់",
+    "description": "គ្រប់គ្រងការកំណត់ប្រព័ន្ធឱសថសាស្ត្ររបស់អ្នក",
+    "saveChanges": "រក្សាទុកការផ្លាស់ប្តូរ",
+    "general": "ទូទៅ",
+    "notifications": "ការជូនដំណឹង",
+    "security": "សុវត្ថិភាព",
+    "backup": "បម្រុងទុក",
+    "pharmacyInfo": "ព័ត៌មានឱសថសាស្ត្រ",
+    "pharmacyInfoDescription": "ធ្វើបច្ចុប្បន្នភាពព័ត៌មានមូលដ្ឋានរបស់ឱសថសាស្ត្ររបស់អ្នក",
+    "pharmacyName": "ឈ្មោះឱសថសាស្ត្រ",
+    "pharmacyNamePlaceholder": "បញ្ចូលឈ្មោះឱសថសាស្ត្រ",
+    "pharmacyEmail": "អាសយដ្ឋានអ៊ីមែល",
+    "pharmacyEmailPlaceholder": "បញ្ចូលអាសយដ្ឋានអ៊ីមែល",
+    "pharmacyPhone": "លេខទូរស័ព្ទ",
+    "pharmacyPhonePlaceholder": "បញ្ចូលលេខទូរស័ព្ទ",
+    "pharmacyAddress": "អាសយដ្ឋាន",
+    "pharmacyAddressPlaceholder": "បញ្ចូលអាសយដ្ឋានឱសថសាស្ត្រ",
+    "displaySettings": "ការកំណត់ការបង្ហាញ",
+    "displaySettingsDescription": "ប្តូររូបរាងប្រព័ន្ធតាមចំណូលចិត្តរបស់អ្នក",
+    "darkMode": "របៀបងងឹត",
+    "darkModeDescription": "ប្តូររវាងរបៀបពន្លឺ និងងងឹត",
+    "compactMode": "របៀបចង្អៀត",
+    "compactModeDescription": "កាត់បន្ថែមចន្លោះសម្រាប់ទិដ្ឋភាពចង្អៀតជាង",
+    "emailNotifications": "ការជូនដំណឹងតាមអ៊ីមែល",
+    "emailNotificationsDescription": "កំណត់ចំណូលចិត្តការជូនដំណឹងតាមអ៊ីមែលរបស់អ្នក",
+    "lowStockAlerts": "ការជូនដំណឹងស្តុកទាប",
+    "lowStockAlertsDescription": "ទទួលបានការជូនដំណឹងនៅពេលផលិតផលអស់",
+    "orderNotifications": "ការជូនដំណឹងការកម្មង់",
+    "orderNotificationsDescription": "ទទួលបានការជូនដំណឹងសម្រាប់ការកម្មង់ថ្មី",
+    "systemUpdates": "ការធ្វើបច្ចុប្បន្នភាពប្រព័ន្ធ",
+    "systemUpdatesDescription": "ជួបជាមួយព័ត៌មានអំពីការធ្វើបច្ចុប្បន្នភាព និងការថែទាំងប្រព័ន្ធ",
+    "passwordSettings": "ការកំណត់ពាក្យសម្ងាត់",
+    "passwordSettingsDescription": "ធ្វើបច្ចុប្បន្នភាពពាក្យសម្ងាត់គណនីរបស់អ្នក",
+    "currentPassword": "ពាក្យសម្ងាត់បច្ចុប្បន្ន",
+    "newPassword": "ពាក្យសម្ងាត់ថ្មី",
+    "confirmPassword": "បញ្ជាក់ពាក្យសម្ងាត់",
+    "twoFactorAuth": "ការផ្ទៀងផ្ទាត់ពីរជាន់",
+    "twoFactorAuthDescription": "បន្ថែមសុវត្ថិភាពបន្ថែមទៅលើគណនីរបស់អ្នក",
+    "enable2FA": "បើក 2FA",
+    "enable2FADescription": "ប្រើកម្មវិធីផ្ទៀងផ្ទាត់សម្រាប់សុវត្ថិភាពបន្ថែម",
+    "backupSettings": "ការកំណត់បម្រុងទុក",
+    "backupSettingsDescription": "កំណត់ចំណូលចិត្តបម្រុងទុកប្រព័ន្ធរបស់អ្នក",
+    "backupFrequency": "ប្រេកង់បម្រុងទុក",
+    "selectFrequency": "ជ្រើសរើសប្រេកង់",
+    "hourly": "រាល់ម៉ោង",
+    "daily": "រាល់ថ្ងៃ",
+    "weekly": "រាល់សប្តាហ៍",
+    "monthly": "រាល់ខែ",
+    "autoBackup": "បម្រុងទុកស្វ័យប្រវត្តិ",
+    "autoBackupDescription": "បើកការបម្រុងទុកប្រព័ន្ធស្វ័យប្រវត្តិ",
+    "createBackup": "បង្កើតបម្រុងទុកឥឡូវនេះ"
+  },
+  "products": {
+    "title": "ផលិតផល",
+    "description": "គ្រប់គ្រងផលិតផលឱសថ",
+    "productList": "បញ្ជីផលិតផល",
+    "addProduct": "បន្ថែមផលិតផល",
+    "addNew": "បន្ថែមផលិតផលថ្មី",
+    "searchPlaceholder": "ស្វែងរកផលិតផល...",
+    "name": "ឈ្មោះ",
+    "category": "ប្រភេទ",
+    "price": "តម្លៃ",
+    "stock": "ស្តុក",
+    "status": "ស្ថានភាព",
+    "actions": "សកម្មភាព",
+    "edit": "កែប្រែ",
+    "delete": "លុប",
+    "statusTypes": {
+      "inStock": "មានស្តុក",
+      "lowStock": "ជិតអស់ស្តុក",
+      "outOfStock": "អស់ស្តុក"
+    },
+    "deleteConfirm": {
+      "title": "លុបផលិតផល",
+      "description": "តើអ្នកប្រាកដជាចង់លុបផលិតផលនេះមែនទេ? សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។",
+      "ok": "យល់ព្រម"
+    },
+    "deleteSuccess": {
+      "title": "ជោគជ័យ",
+      "message": "ផលិតផលត្រូវបានលុបដោយជោគជ័យ"
+    },
+    "namePlaceholder": "បញ្ចូលឈ្មោះផលិតផល",
+    "selectCategory": "ជ្រើសរើសប្រភេទ",
+    "pricePlaceholder": "Enter price",
+    "stockPlaceholder": "Enter stock quantity",
+    "addSuccess": {
+      "title": "ជោគជ័យ",
+      "message": "ផលិតផលត្រូវបានបន្ថែមដោយជោគជ័យ"
+    },
+    "addError": {
+      "message": "បរាជ័យក្នុងការបន្ថែមផលិតផល។ សូមព្យាយាមម្តងទៀត។"
+    },
+    "cancelConfirm": {
+      "title": "បោះបង់ការផ្លាស់ប្តូរ?",
+      "message": "អ្នកមានការផ្លាស់ប្តូរដែលមិនទាន់រក្សាទុក។ តើអ្នកប្រាកដជាចង់បោះបង់វាមែនទេ?"
+    },
+    "updateSuccess": {
+      "title": "ជោគជ័យ",
+      "message": "ផលិតផលត្រូវបានកែប្រែដោយជោគជ័យ"
+    },
+    "updateError": {
+      "message": "បរាជ័យក្នុងការកែប្រែផលិតផល"
+    }
+  },
+  "users": {
+    "title": "អ្នកប្រើប្រាស់",
+    "addNew": "បន្ថែមអ្នកប្រើប្រាស់ថ្មី",
+    "edit": "កែប្រែអ្នកប្រើប្រាស់",
+    "name": "ឈ្មោះ",
+    "email": "អ៊ីមែល",
+    "role": "តួនាទី",
+    "status": "ស្ថានភាព",
+    "searchPlaceholder": "ស្វែងរកអ្នកប្រើប្រាស់...",
+    "namePlaceholder": "បញ្ចូលឈ្មោះ",
+    "emailPlaceholder": "បញ្ចូលអ៊ីមែល",
+    "selectRole": "ជ្រើសរើសតួនាទី",
+    "selectStatus": "ជ្រើសរើសស្ថានភាព",
+    "roles": {
+      "admin": "អ្នកគ្រប់គ្រង",
+      "pharmacist": "ឱសថករ",
+      "cashier": "អ្នកគិតលុយ"
+    },
+    "statusTypes": {
+      "active": "សកម្ម",
+      "inactive": "អសកម្ម"
+    },
+    "notFound": "រកមិនឃើញអ្នកប្រើប្រាស់",
+    "fetchError": "បរាជ័យក្នុងការទាញយកទិន្នន័យអ្នកប្រើប្រាស់",
+    "updateSuccess": {
+      "title": "ជោគជ័យ",
+      "message": "អ្នកប្រើប្រាស់ត្រូវបានកែប្រែដោយជោគជ័យ"
+    },
+    "updateError": {
+      "message": "បរាជ័យក្នុងការកែប្រែអ្នកប្រើប្រាស់"
+    },
+    "cancelConfirm": {
+      "title": "បោះបង់ការផ្លាស់ប្តូរ?",
+      "message": "តើអ្នកប្រាកដជាចង់បោះបង់ការផ្លាស់ប្តូររបស់អ្នកឬទេ?"
+    },
+    "deleteConfirm": {
+      "title": "លុបអ្នកប្រើប្រាស់",
+      "message": "តើអ្នកប្រាកដជាចង់លុបអ្នកប្រើប្រាស់នេះឬទេ? សកម្មភាពនេះមិនអាចត្រឡប់វិញបានទេ។"
+    },
+    "deleteSuccess": {
+      "title": "ជោគជ័យ",
+      "message": "អ្នកប្រើប្រាស់ត្រូវបានលុបដោយជោគជ័យ"
+    },
+    "deleteError": {
+      "title": "កំហុស",
+      "message": "បរាជ័យក្នុងការលុបអ្នកប្រើប្រាស់។ សូមព្យាយាមម្តងទៀត។"
+    }
   }
 } 
