@@ -1,0 +1,61 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "signIn": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "signInButton": "Sign in",
+    "noAccount": "Don't have an account?",
+    "contactAdmin": "Contact Admin"
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "description": "Enter your email address and we'll send you a link to reset your password.",
+    "sendResetLink": "Send Reset Link",
+    "rememberPassword": "Remember your password?",
+    "backToLogin": "Back to login"
+  },
+  "contact": {
+    "title": "Contact Admin",
+    "description": "Fill out the form below to request an account or get help.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "message": "Message",
+    "messagePlaceholder": "Tell us why you need an account or what help you need...",
+    "sendMessage": "Send Message",
+    "haveAccount": "Already have an account?",
+    "backToLogin": "Back to login"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to Pharmacy Management System",
+    "refresh": "Refresh",
+    "totalUsers": "Total Users",
+    "totalProducts": "Total Products",
+    "totalOrders": "Total Orders",
+    "revenue": "Revenue",
+    "salesOverview": "Sales Overview",
+    "salesDescription": "View your sales performance over time",
+    "chartPlaceholder": "Sales chart will be displayed here",
+    "recentActivity": "Recent Activity",
+    "activityDescription": "Latest updates and changes in your system",
+    "activityItem": "New order #1234 was placed",
+    "activityTime": "2 minutes ago"
+  },
+  "admin": {
+    "navigation": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "products": "Products",
+      "orders": "Orders",
+      "settings": "Settings",
+      "logout": "Logout"
+    }
+  },
+  "mobile": {
+    "title": "Desktop Only",
+    "description": "This web application is optimized for tablet and desktop screens. Please download our mobile app for the best experience on your device."
+  }
+} 
