@@ -13,7 +13,6 @@ import {
   LogOut,
   Menu,
   X,
-  Globe,
   Pill,
 } from "lucide-react";
 import { useState } from "react";
@@ -24,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import 'flag-icons/css/flag-icons.min.css';
 
 const navigation = [
   { name: "dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
@@ -34,6 +34,11 @@ const navigation = [
 ];
 
 type Language = "en" | "km";
+
+const languages = [
+  { code: 'en', name: 'English', flag: 'gb' },
+  { code: 'km', name: 'ខ្មែរ', flag: 'kh' },
+] as const;
 
 export default function AdminLayout({
   children,
@@ -147,20 +152,32 @@ export default function AdminLayout({
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="flex-1" />
             {/* Language Switcher */}
-            <div className="flex items-center gap-x-4">
-              <Globe className="h-5 w-5 text-gray-400" />
+            <div className="flex items-center">
               <Select
                 value={language}
                 onValueChange={(value: Language) => setLanguage(value)}
               >
                 <SelectTrigger className="w-[120px] border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                  <SelectValue placeholder="Select language" />
+                  <SelectValue>
+                    <div className="flex items-center gap-2">
+                      <span className={`fi fi-${languages.find(lang => lang.code === language)?.flag}`} />
+                      <span>{languages.find(lang => lang.code === language)?.name}</span>
+                    </div>
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="en">English</SelectItem>
-                  <SelectItem value="km" className="font-khmer">
-                    ខ្មែរ
-                  </SelectItem>
+                  {languages.map((lang) => (
+                    <SelectItem 
+                      key={lang.code} 
+                      value={lang.code}
+                      className="cursor-pointer"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className={`fi fi-${lang.flag}`} />
+                        <span className={lang.code === 'km' ? 'font-khmer' : ''}>{lang.name}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>

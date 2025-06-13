@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Spectral, Battambang } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { cookies } from "next/headers";
 import { MobileAlert } from "@/components/mobile-alert";
 
-const inter = Inter({ subsets: ["latin"] });
+const spectral = Spectral({ 
+  weight: ['400', '500', '600', '700'],
+  subsets: ["latin"],
+  variable: '--font-spectral',
+  display: 'swap',
+});
+
+const battambang = Battambang({ 
+  weight: ['400', '700'],
+  subsets: ["khmer"],
+  variable: '--font-battambang',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "Pharmacy Management System",
@@ -42,11 +54,15 @@ export default async function RootLayout({
       : "km";
 
   return (
-    <html lang={language}>
-      <body className={inter.className}>
+    <html lang={language} className={`${spectral.variable} ${battambang.variable}`}>
+      <body className={`antialiased ${language === 'km' ? 'font-battambang' : 'font-spectral'}`}>
         <LanguageProvider>
-          <MobileAlert />
-          {children}
+          <div className="md:contents">
+            <MobileAlert />
+          </div>
+          <div className="hidden md:block">
+            {children}
+          </div>
         </LanguageProvider>
       </body>
     </html>
