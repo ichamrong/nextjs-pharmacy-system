@@ -181,6 +181,7 @@
     "productList": "បញ្ជីផលិតផល",
     "addProduct": "បន្ថែមផលិតផល",
     "addNew": "បន្ថែមផលិតផលថ្មី",
+    "addDescription": "បន្ថែមផលិតផលថ្មីទៅក្នុងស្តុករបស់អ្នក",
     "searchPlaceholder": "ស្វែងរកផលិតផល...",
     "name": "ឈ្មោះ",
     "category": "ប្រភេទ",
@@ -191,9 +192,25 @@
     "edit": "កែប្រែ",
     "delete": "លុប",
     "statusTypes": {
-      "inStock": "មានស្តុក",
-      "lowStock": "ជិតអស់ស្តុក",
-      "outOfStock": "អស់ស្តុក"
+      "low_stock": "ជិតអស់ស្តុក"
+    },
+    "allStatuses": "គ្រប់ស្ថានភាព",
+    "filterByCategory": "ត្រងតាមប្រភេទ",
+    "filterByStatus": "ត្រងតាមស្ថានភាព",
+    "allCategories": "គ្រប់ប្រភេទ",
+    "categories": {
+      "painRelief": "ថ្នាំបំបៅឈឺ",
+      "painrelief": "ថ្នាំបំបៅឈឺ",
+      "antibiotics": "ថ្នាំប្រឆាំងជាលិកា",
+      "vitamins": "វីតាមីន",
+      "firstAid": "ជំនួយបឋម",
+      "firstaid": "ជំនួយបឋម",
+      "skinCare": "ថែទាំងស្បែក",
+      "skincare": "ថែទាំងស្បែក",
+      "eyeCare": "ថែទាំងភ្នែក",
+      "eyecare": "ថែទាំងភ្នែក",
+      "dentalCare": "ថែទាំងធ្មេញ",
+      "dentalcare": "ថែទាំងធ្មេញ"
     },
     "deleteConfirm": {
       "title": "លុបផលិតផល",
@@ -206,8 +223,8 @@
     },
     "namePlaceholder": "បញ្ចូលឈ្មោះផលិតផល",
     "selectCategory": "ជ្រើសរើសប្រភេទ",
-    "pricePlaceholder": "Enter price",
-    "stockPlaceholder": "Enter stock quantity",
+    "pricePlaceholder": "បញ្ចូលតម្លៃ",
+    "stockPlaceholder": "បញ្ចូលចំនួនស្តុក",
     "addSuccess": {
       "title": "ជោគជ័យ",
       "message": "ផលិតផលត្រូវបានបន្ថែមដោយជោគជ័យ"
@@ -225,7 +242,33 @@
     },
     "updateError": {
       "message": "បរាជ័យក្នុងការកែប្រែផលិតផល"
-    }
+    },
+    "filters": "តម្រង",
+    "filterDescription": "ជ្រើសរើសតម្រងរបស់អ្នកដើម្បីកាត់បន្ថែមលទ្ធផល",
+    "selectCategory": "ជ្រើសរើសប្រភេទ",
+    "selectStatus": "ជ្រើសរើសស្ថានភាព",
+    "view": "មើល",
+    "lastUpdated": "ធ្វើបច្ចុប្បន្នភាពចុងក្រោយ",
+    "filterDrawer": {
+      "title": "តម្រងផលិតផល",
+      "description": "អនុវត្តតម្រងដើម្បីស្វែងរកផលិតផលជាក់លាក់",
+      "category": "ប្រភេទ",
+      "status": "ស្ថានភាព",
+      "priceRange": "ចន្លោះតម្លៃ",
+      "stockRange": "ចន្លោះស្តុក",
+      "minPrice": "តម្លៃអប្បបរមា",
+      "maxPrice": "តម្លៃអតិបរមា",
+      "minStock": "ស្តុកអប្បបរមា",
+      "maxStock": "ស្តុកអតិបរមា",
+      "applyFilters": "អនុវត្តតម្រង",
+      "resetFilters": "កំណត់ឡើងវិញ",
+      "noCategories": "មិនមានប្រភេទទេ",
+      "allCategories": "គ្រប់ប្រភេទ"
+    },
+    "productInformation": "ព័ត៌មានផលិតផល",
+    "description": "ការពិពណ៌នា",
+    "descriptionPlaceholder": "បញ្ចូលការពិពណ៌នាផលិតផល",
+    "viewDescription": "មើលព័ត៌មានលម្អិតអំពីផលិតផលនេះ"
   },
   "users": {
     "title": "អ្នកប្រើប្រាស់",

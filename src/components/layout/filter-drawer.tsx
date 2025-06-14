@@ -7,10 +7,13 @@ import {
   SheetContent,
   SheetFooter,
   SheetTrigger,
+  SheetHeader,
+  SheetTitle,
+  SheetClose,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Filter } from "lucide-react";
+import { Filter, X } from "lucide-react";
 
 interface FilterDrawerProps {
   title: string;
@@ -47,9 +50,13 @@ export function FilterDrawer({
         side="right"
         className="w-[50vw] min-w-[400px] max-w-[800px] bg-white p-0 flex flex-col border-0"
       >
-        <div className="flex items-center justify-between px-8 py-6 shadow-sm">
-          <h2 className="text-lg font-semibold">{title}</h2>
-        </div>
+        <SheetHeader className="px-8 py-6 shadow-sm">
+          <SheetTitle>{title}</SheetTitle>
+          <SheetClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-gray-100 cursor-pointer">
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </SheetClose>
+        </SheetHeader>
 
         <ScrollArea className="flex-1">
           <div className="px-10 py-8">

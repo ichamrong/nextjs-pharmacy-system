@@ -1,229 +1,409 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { PlusCircle, Search, Trash2, Pencil } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { useLanguage } from "@/contexts/LanguageContext";
-import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
+import Swal from "sweetalert2";
+import { PageHeader } from "@/components/layout/page-header";
+import { SearchBar } from "@/components/layout/search-bar";
+import { DataTable } from "@/components/layout/data-table";
+import { FilterDrawer } from "@/components/layout/filter-drawer";
+import { Edit, Trash, PackagePlus, MoreVertical, Eye } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
+import { ClientWrapper } from "@/components/client-wrapper";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-// Mock data for products
-const mockProducts = [
-  {
-    id: 1,
-    name: "Paracetamol 500mg",
-    category: "Pain Relief",
-    price: 2.5,
-    stock: 100,
-    status: "in_stock",
-  },
-  {
-    id: 2,
-    name: "Amoxicillin 250mg",
-    category: "Antibiotics",
-    price: 5.75,
-    stock: 15,
-    status: "low_stock",
-  },
-  {
-    id: 3,
-    name: "Ibuprofen 400mg",
-    category: "Pain Relief",
-    price: 3.25,
-    stock: 0,
-    status: "out_of_stock",
-  },
-];
+interface Product {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  status: "low_stock";
+  lastUpdated: string;
+}
+
+// Generate mock data
+const generateMockProducts = (): Product[] => {
+  const categories = ["Pain Relief", "Antibiotics", "Vitamins", "First Aid", "Skin Care"];
+  const products: Product[] = [];
+
+  for (let i = 1; i <= 50; i++) {
+    const category = categories[Math.floor(Math.random() * categories.length)];
+    const lastUpdated = new Date(
+      Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000,
+    ).toISOString();
+
+    products.push({
+      id: i.toString(),
+      name: `Product ${i}`,
+      category,
+      price: parseFloat((Math.random() * 100).toFixed(2)),
+      stock: Math.floor(Math.random() * 100),
+      status: "low_stock",
+      lastUpdated,
+    });
+  }
+
+  return products;
+};
 
 export default function ProductsPage() {
-  const { t } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [products, setProducts] = useState(mockProducts);
-  const [productToDelete, setProductToDelete] = useState<number | null>(null);
   const router = useRouter();
+  const { t, locale } = useLanguage();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [products] = useState<Product[]>(generateMockProducts());
+  const itemsPerPage = 5;
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    if (locale === "km") {
+      const khmerMonths = [
+        "មករា",
+        "កុម្ភៈ",
+        "មីនា",
+        "មេសា",
+        "ឧសភា",
+        "មិថុនា",
+        "កក្កដា",
+        "សីហា",
+        "កញ្ញា",
+        "តុលា",
+        "វិច្ឆិកា",
+        "ធ្នូ",
+      ];
+      const toKhmerNumeral = (n: number) => {
+        const khmerNumerals = [
+          "០",
+          "១",
+          "២",
+          "៣",
+          "៤",
+          "៥",
+          "៦",
+          "៧",
+          "៨",
+          "៩",
+        ];
+        return n
+          .toString()
+          .split("")
+          .map((d) => khmerNumerals[Number(d)])
+          .join("");
+      };
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const period = hours >= 12 ? "ល្ងាច" : "ព្រឹក";
+      const khmerHours = toKhmerNumeral(hours % 12 || 12);
+      const khmerMinutes = toKhmerNumeral(
+        Number(minutes.toString().padStart(2, "0")),
+      );
+      return `${toKhmerNumeral(date.getDate())} ${khmerMonths[date.getMonth()]} ${toKhmerNumeral(date.getFullYear())}, ${khmerHours}:${khmerMinutes} ${period}`;
+    }
+    return date.toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
   };
 
-  const handleDelete = (id: number) => {
-    setProductToDelete(id);
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = categoryFilter === "all" || product.category === categoryFilter;
+    const matchesStatus = statusFilter === "all" || product.status === statusFilter;
+    return matchesSearch && matchesCategory && matchesStatus;
+  });
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
-  const handleEdit = (id: number) => {
-    router.push(`/admin/products/${id}`);
-  };
+  const handleDelete = async (id: string) => {
+    const result = await Swal.fire({
+      title: t("products.deleteConfirm.title"),
+      text: t("products.deleteConfirm.description"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: t("products.delete"),
+      cancelButtonText: t("common.cancel"),
+      confirmButtonColor: "#ef4444",
+      customClass: {
+        popup: "rounded-lg",
+        confirmButton: "rounded-md",
+        cancelButton: "rounded-md",
+      },
+    });
 
-  const confirmDelete = () => {
-    if (productToDelete) {
-      setProducts(products.filter((product) => product.id !== productToDelete));
-      setProductToDelete(null);
-      
-      // Show success alert
-      Swal.fire({
-        title: t("products.deleteSuccess.title"),
-        text: t("products.deleteSuccess.message"),
-        icon: "success",
-        confirmButtonText: t("common.ok"),
-        timer: 2000,
-        timerProgressBar: true,
-      });
+    if (result.isConfirmed) {
+      try {
+        // Handle delete logic here
+        console.log("Delete product:", id);
+        // Show success message
+        Swal.fire({
+          title: t("products.deleteSuccess.title"),
+          text: t("products.deleteSuccess.message"),
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } catch {
+        // Show error message
+        Swal.fire({
+          title: t("products.deleteError.title"),
+          text: t("products.deleteError.message"),
+          icon: "error",
+        });
+      }
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "in_stock":
-        return "bg-green-100 text-green-800";
-      case "low_stock":
-        return "bg-yellow-100 text-yellow-800";
-      case "out_of_stock":
-        return "bg-red-100 text-red-800";
-      default:
-        return "bg-gray-100 text-gray-800";
+  const renderPagination = () => {
+    const pages = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
     }
-  };
 
-  const getStatusTranslation = (status: string) => {
-    switch (status) {
-      case "in_stock":
-        return t("products.statusTypes.inStock");
-      case "low_stock":
-        return t("products.statusTypes.lowStock");
-      case "out_of_stock":
-        return t("products.statusTypes.outOfStock");
-      default:
-        return status;
-    }
-  };
-
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
-
-  return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">{t("products.title")}</h1>
-        <Button 
-          className="flex items-center gap-2"
-          onClick={() => router.push("/admin/products/new")}
+    return (
+      <div className="flex items-center justify-center space-x-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+          className="border-gray-200 hover:bg-gray-100 disabled:opacity-50"
         >
-          <PlusCircle className="h-5 w-5" />
-          {t("products.addNew")}
+          {t("common.previous")}
+        </Button>
+        <div className="flex items-center space-x-1">
+          {pages.map((page) => (
+            <Button
+              key={page}
+              variant={currentPage === page ? "default" : "outline"}
+              size="sm"
+              onClick={() => handlePageChange(page)}
+              className={`min-w-[32px] h-8 px-2 ${
+                currentPage === page
+                  ? "bg-emerald-600 text-white hover:bg-emerald-700"
+                  : "border-gray-200 hover:bg-gray-100"
+              }`}
+            >
+              {page}
+            </Button>
+          ))}
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+          disabled={currentPage === totalPages}
+          className="border-gray-200 hover:bg-gray-100 disabled:opacity-50"
+        >
+          {t("common.next")}
         </Button>
       </div>
+    );
+  };
 
-      <div className="mb-6">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-          <Input
-            type="text"
-            placeholder={t("products.searchPlaceholder")}
-            value={searchQuery}
-            onChange={handleSearch}
-            className="pl-10"
-          />
+  return (
+    <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
+      <PageHeader
+        title={t("products.title")}
+        description={t("products.description")}
+        action={{
+          label: t("products.addNew"),
+          onClick: () => router.push(`/${locale}/admin/products/new`),
+          icon: <PackagePlus className="mr-2 h-4 w-4" />,
+        }}
+      />
+
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <SearchBar
+          placeholder={t("products.searchPlaceholder")}
+          value={searchQuery}
+          onChange={setSearchQuery}
+          className="w-full sm:w-64"
+        />
+        <div className="w-full sm:w-auto flex justify-end">
+          <FilterDrawer
+            title={t("products.filters")}
+            onApply={() => {
+              // Apply filters
+              setCurrentPage(1);
+            }}
+            onReset={() => {
+              setCategoryFilter("all");
+              setStatusFilter("all");
+              setCurrentPage(1);
+            }}
+          >
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="category-filter" className="text-sm font-medium">
+                    {t("products.filterByCategory")}
+                  </Label>
+                  <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+                    <SelectTrigger id="category-filter" className="w-full">
+                      <SelectValue placeholder={t("products.selectCategory")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">{t("products.allCategories")}</SelectItem>
+                      <SelectItem value="Pain Relief">{t("products.categories.painRelief")}</SelectItem>
+                      <SelectItem value="Antibiotics">{t("products.categories.antibiotics")}</SelectItem>
+                      <SelectItem value="Vitamins">{t("products.categories.vitamins")}</SelectItem>
+                      <SelectItem value="First Aid">{t("products.categories.firstAid")}</SelectItem>
+                      <SelectItem value="Skin Care">{t("products.categories.skinCare")}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="status-filter" className="text-sm font-medium">
+                    {t("products.filterByStatus")}
+                  </Label>
+                  <Select value={statusFilter} onValueChange={setStatusFilter}>
+                    <SelectTrigger id="status-filter" className="w-full">
+                      <SelectValue placeholder={t("products.selectStatus")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">{t("products.allStatuses")}</SelectItem>
+                      <SelectItem value="low_stock">{t("products.statusTypes.low_stock")}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </div>
+          </FilterDrawer>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>{t("products.name")}</TableHead>
-              <TableHead>{t("products.category")}</TableHead>
-              <TableHead>{t("products.price")}</TableHead>
-              <TableHead>{t("products.stock")}</TableHead>
-              <TableHead>{t("products.status")}</TableHead>
-              <TableHead className="text-right">
-                {t("products.actions")}
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredProducts.map((product) => (
-              <TableRow key={product.id}>
-                <TableCell className="font-medium">{product.name}</TableCell>
-                <TableCell>{product.category}</TableCell>
-                <TableCell>${product.price.toFixed(2)}</TableCell>
-                <TableCell>{product.stock}</TableCell>
-                <TableCell>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs ${getStatusColor(product.status)}`}
+      <DataTable
+        columns={[
+          {
+            header: t("products.name"),
+            accessorKey: "name",
+          },
+          {
+            header: t("products.category"),
+            accessorKey: "category",
+          },
+          {
+            header: t("products.price"),
+            accessorKey: "price",
+            cell: ({ row }) => (
+              <ClientWrapper>
+                ${row.original.price.toFixed(2)}
+              </ClientWrapper>
+            ),
+          },
+          {
+            header: t("products.stock"),
+            accessorKey: "stock",
+          },
+          {
+            header: t("products.status"),
+            accessorKey: "status",
+            cell: ({ row }) => (
+              <ClientWrapper>
+                <Badge
+                  variant="outline"
+                  className="capitalize bg-yellow-50 text-yellow-700 border-yellow-200"
+                >
+                  {t(`products.statusTypes.${row.original.status}`)}
+                </Badge>
+              </ClientWrapper>
+            ),
+          },
+          {
+            header: t("products.lastUpdated"),
+            accessorKey: "lastUpdated",
+            cell: ({ row }) => (
+              <ClientWrapper>
+                {formatDate(row.original.lastUpdated)}
+              </ClientWrapper>
+            ),
+          },
+          {
+            header: t("products.actions"),
+            accessorKey: "id",
+            cell: ({ row }) => (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className="h-8 w-8 p-0 hover:bg-emerald-50/50 rounded-full"
                   >
-                    {getStatusTranslation(product.status)}
-                  </span>
-                </TableCell>
-                <TableCell className="text-right">
-                  <div className="flex justify-end gap-2">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleEdit(product.id)}
-                      className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
-                    >
-                      <Pencil className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleDelete(product.id)}
-                      className="text-red-600 hover:text-red-700 hover:bg-red-50"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+                    <MoreVertical className="h-4 w-4 text-gray-500" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="w-[160px] bg-white shadow-lg rounded-lg border-0 py-1"
+                >
+                  <DropdownMenuItem
+                    onClick={() =>
+                      router.push(`/${locale}/admin/products/${row.original.id}`)
+                    }
+                    className="cursor-pointer hover:bg-emerald-50/50 px-3 py-2 text-sm text-gray-700"
+                  >
+                    <Eye className="mr-2 h-4 w-4 text-gray-500" />
+                    <span>{t("products.view")}</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      router.push(
+                        `/${locale}/admin/products/${row.original.id}/edit`,
+                      )
+                    }
+                    className="cursor-pointer hover:bg-emerald-50/50 px-3 py-2 text-sm text-gray-700"
+                  >
+                    <Edit className="mr-2 h-4 w-4 text-gray-500" />
+                    <span>{t("products.edit")}</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => handleDelete(row.original.id)}
+                    className="cursor-pointer hover:bg-emerald-50/50 px-3 py-2 text-sm text-red-600"
+                  >
+                    <Trash className="mr-2 h-4 w-4 text-red-600" />
+                    <span>{t("products.delete")}</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ),
+          },
+        ]}
+        data={currentProducts}
+      />
 
-      <AlertDialog
-        open={!!productToDelete}
-        onOpenChange={() => setProductToDelete(null)}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              {t("products.deleteConfirm.title")}
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              {t("products.deleteConfirm.description")}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
-            <AlertDialogAction
-              onClick={confirmDelete}
-              className="bg-red-600 hover:bg-red-700"
-            >
-              {t("common.delete")}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <div className="flex justify-center mt-6">{renderPagination()}</div>
     </div>
   );
 }

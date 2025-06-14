@@ -184,6 +184,7 @@
     "productList": "Product List",
     "addProduct": "Add Product",
     "addNew": "Add New Product",
+    "addDescription": "Add a new product to your inventory",
     "searchPlaceholder": "Search products...",
     "name": "Product Name",
     "category": "Category",
@@ -194,9 +195,25 @@
     "edit": "Edit",
     "delete": "Delete",
     "statusTypes": {
-      "inStock": "In Stock",
-      "lowStock": "Low Stock",
-      "outOfStock": "Out of Stock"
+      "low_stock": "Low Stock"
+    },
+    "allStatuses": "All Statuses",
+    "filterByCategory": "Filter by Category",
+    "filterByStatus": "Filter by Status",
+    "allCategories": "All Categories",
+    "categories": {
+      "painRelief": "Pain Relief",
+      "painrelief": "Pain Relief",
+      "antibiotics": "Antibiotics",
+      "vitamins": "Vitamins",
+      "firstAid": "First Aid",
+      "firstaid": "First Aid",
+      "skinCare": "Skin Care",
+      "skincare": "Skin Care",
+      "eyeCare": "Eye Care",
+      "eyecare": "Eye Care",
+      "dentalCare": "Dental Care",
+      "dentalcare": "Dental Care"
     },
     "deleteConfirm": {
       "title": "Delete Product",
@@ -230,7 +247,33 @@
     },
     "updateError": {
       "message": "Failed to update product"
-    }
+    },
+    "filters": "Filters",
+    "filterDescription": "Select your filters to narrow down the results",
+    "selectCategory": "Select category",
+    "selectStatus": "Select status",
+    "view": "View",
+    "lastUpdated": "Last Updated",
+    "filterDrawer": {
+      "title": "Filter Products",
+      "description": "Apply filters to find specific products",
+      "category": "Category",
+      "status": "Status",
+      "priceRange": "Price Range",
+      "stockRange": "Stock Range",
+      "minPrice": "Min Price",
+      "maxPrice": "Max Price",
+      "minStock": "Min Stock",
+      "maxStock": "Max Stock",
+      "applyFilters": "Apply Filters",
+      "resetFilters": "Reset Filters",
+      "noCategories": "No categories available",
+      "allCategories": "All Categories"
+    },
+    "productInformation": "Product Information",
+    "description": "Description",
+    "descriptionPlaceholder": "Enter product description",
+    "viewDescription": "View detailed information about this product"
   },
   "users": {
     "title": "Users",

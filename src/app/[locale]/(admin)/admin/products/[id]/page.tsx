@@ -1,11 +1,11 @@
-import EditProductForm from "./edit-product-form";
+import ViewProduct from "./view-product";
 
-interface EditProductPageProps {
+interface ViewProductPageProps {
   params: {
     id: string;
   };
 }
 
-export default function EditProductPage({ params }: EditProductPageProps) {
-  return <EditProductForm productId={params.id} />;
+export default function ViewProductPage({ params }: ViewProductPageProps) {
+  return <ViewProduct productId={params.id} />;
 }
