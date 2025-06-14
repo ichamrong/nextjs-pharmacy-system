@@ -12,6 +12,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { SlidersHorizontal } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface FilterDrawerProps {
   title: string;
@@ -19,6 +20,8 @@ interface FilterDrawerProps {
 }
 
 export function FilterDrawer({ title, children }: FilterDrawerProps) {
+  const { t } = useLanguage();
+  
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -27,20 +30,16 @@ export function FilterDrawer({ title, children }: FilterDrawerProps) {
           {title}
         </Button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-[400px] sm:w-[540px]">
+      <SheetContent side="right" className="w-[400px] sm:w-[540px] bg-white">
         <SheetHeader className="space-y-2.5">
           <SheetTitle>{title}</SheetTitle>
-          <SheetDescription>
-            Select your filters to narrow down the results
-          </SheetDescription>
+          <SheetDescription>{t("users.filterDescription")}</SheetDescription>
         </SheetHeader>
         <Separator className="my-4" />
-        <ScrollArea className="h-[calc(100vh-8rem)] pr-4">
-          <div className="space-y-6">
-            {children}
-          </div>
+        <ScrollArea className="h-[calc(100vh-10rem)]">
+          <div className="space-y-6 pr-6">{children}</div>
         </ScrollArea>
       </SheetContent>
     </Sheet>
   );
-} 
+}

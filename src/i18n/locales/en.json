@@ -260,6 +260,9 @@
     },
     "admin": "Admin",
     "active": "Active",
+    "pharmacist": "Pharmacist",
+    "cashier": "Cashier",
+    "inactive": "Inactive",
     "roles": {
       "admin": "Admin",
       "pharmacist": "Pharmacist",
@@ -269,7 +272,13 @@
       "active": "Active",
       "inactive": "Inactive"
     },
-    "filters": "Filters"
+    "filters": "Filters",
+    "filterDescription": "Select your filters to narrow down the results",
+    "selectRole": "Select role",
+    "selectStatus": "Select status",
+    "view": "View",
+    "userDeleted": "User has been deleted successfully",
+    "deleteErrorDescription": "Failed to delete user. Please try again."
   },
   "categories": {
     "title": "Categories",

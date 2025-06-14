@@ -11,7 +11,6 @@ import { DataTable } from "@/components/layout/data-table";
 import { FilterDrawer } from "@/components/layout/filter-drawer";
 import { Edit, Trash, UserPlus, MoreVertical, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -20,6 +19,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface User {
   id: string;
@@ -70,10 +76,10 @@ export default function UsersPage() {
       cancelButtonText: t("users.cancel"),
       confirmButtonColor: "#ef4444",
       customClass: {
-        popup: 'rounded-lg',
-        confirmButton: 'rounded-md',
-        cancelButton: 'rounded-md'
-      }
+        popup: "rounded-lg",
+        confirmButton: "rounded-md",
+        cancelButton: "rounded-md",
+      },
     });
 
     if (result.isConfirmed) {
@@ -87,14 +93,14 @@ export default function UsersPage() {
           text: t("users.userDeleted"),
           icon: "success",
           timer: 2000,
-          showConfirmButton: false
+          showConfirmButton: false,
         });
       } catch {
         // Show error message
         Swal.fire({
           title: t("users.deleteError"),
           text: t("users.deleteErrorDescription"),
-          icon: "error"
+          icon: "error",
         });
       } finally {
         setIsLoading(false);
@@ -178,40 +184,30 @@ export default function UsersPage() {
         />
         <div className="w-full sm:w-auto flex justify-end">
           <FilterDrawer title={t("users.filters")}>
-            <div className="space-y-6">
+            <div className="space-y-6 p-4">
+              <p className="text-sm text-gray-500">
+                {t("users.filterDescription")}
+              </p>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <h3 className="font-medium text-gray-900">{t("users.filterByRole")}</h3>
-                  <RadioGroup
-                    value={roleFilter}
-                    onValueChange={(value) => setRoleFilter(value)}
-                    className="space-y-2"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="all" id="role-all" />
-                      <Label htmlFor="role-all" className="text-gray-900">
-                        {t("users.allRoles")}
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="admin" id="role-admin" />
-                      <Label htmlFor="role-admin" className="text-gray-900">
-                        {t("users.admin")}
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="pharmacist" id="role-pharmacist" />
-                      <Label htmlFor="role-pharmacist" className="text-gray-900">
+                  <Label htmlFor="role-filter" className="text-sm font-medium">
+                    {t("users.filterByRole")}
+                  </Label>
+                  <Select value={roleFilter} onValueChange={setRoleFilter}>
+                    <SelectTrigger id="role-filter" className="w-full">
+                      <SelectValue placeholder={t("users.selectRole")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">{t("users.allRoles")}</SelectItem>
+                      <SelectItem value="admin">{t("users.admin")}</SelectItem>
+                      <SelectItem value="pharmacist">
                         {t("users.pharmacist")}
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="cashier" id="role-cashier" />
-                      <Label htmlFor="role-cashier" className="text-gray-900">
+                      </SelectItem>
+                      <SelectItem value="cashier">
                         {t("users.cashier")}
-                      </Label>
-                    </div>
-                  </RadioGroup>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
 
@@ -219,31 +215,28 @@ export default function UsersPage() {
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <h3 className="font-medium text-gray-900">{t("users.filterByStatus")}</h3>
-                  <RadioGroup
-                    value={statusFilter}
-                    onValueChange={(value) => setStatusFilter(value)}
-                    className="space-y-2"
+                  <Label
+                    htmlFor="status-filter"
+                    className="text-sm font-medium"
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="all" id="status-all" />
-                      <Label htmlFor="status-all" className="text-gray-900">
+                    {t("users.filterByStatus")}
+                  </Label>
+                  <Select value={statusFilter} onValueChange={setStatusFilter}>
+                    <SelectTrigger id="status-filter" className="w-full">
+                      <SelectValue placeholder={t("users.selectStatus")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">
                         {t("users.allStatuses")}
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="active" id="status-active" />
-                      <Label htmlFor="status-active" className="text-gray-900">
+                      </SelectItem>
+                      <SelectItem value="active">
                         {t("users.active")}
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="inactive" id="status-inactive" />
-                      <Label htmlFor="status-inactive" className="text-gray-900">
+                      </SelectItem>
+                      <SelectItem value="inactive">
                         {t("users.inactive")}
-                      </Label>
-                    </div>
-                  </RadioGroup>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
             </div>
@@ -279,13 +272,15 @@ export default function UsersPage() {
             accessorKey: "role",
             cell: ({ row }) => (
               <Badge
-                variant={row.original.role === "admin" ? "default" : "secondary"}
+                variant={
+                  row.original.role === "admin" ? "default" : "secondary"
+                }
                 className={`${
                   row.original.role === "admin"
                     ? "bg-blue-100 text-blue-700"
                     : row.original.role === "pharmacist"
-                    ? "bg-purple-100 text-purple-700"
-                    : "bg-gray-100 text-gray-700"
+                      ? "bg-purple-100 text-purple-700"
+                      : "bg-gray-100 text-gray-700"
                 }`}
               >
                 {t(`users.${row.original.role}`)}
@@ -297,7 +292,9 @@ export default function UsersPage() {
             accessorKey: "status",
             cell: ({ row }) => (
               <Badge
-                variant={row.original.status === "active" ? "default" : "secondary"}
+                variant={
+                  row.original.status === "active" ? "default" : "secondary"
+                }
                 className={`${
                   row.original.status === "active"
                     ? "bg-green-100 text-green-700"
@@ -330,13 +327,17 @@ export default function UsersPage() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem
-                    onClick={() => router.push(`/admin/users/${row.original.id}`)}
+                    onClick={() =>
+                      router.push(`/admin/users/${row.original.id}`)
+                    }
                   >
                     <Eye className="mr-2 h-4 w-4" />
                     {t("users.view")}
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => router.push(`/admin/users/${row.original.id}/edit`)}
+                    onClick={() =>
+                      router.push(`/admin/users/${row.original.id}/edit`)
+                    }
                   >
                     <Edit className="mr-2 h-4 w-4" />
                     {t("users.edit")}
