@@ -3,8 +3,8 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
+        protocol: "https",
+        hostname: "images.unsplash.com",
       },
     ],
     unoptimized: true,
@@ -25,8 +25,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/:locale/pharmacy-bg.jpg',
-        destination: '/pharmacy-bg.jpg',
+        source: "/:locale/pharmacy-bg.jpg",
+        destination: "/pharmacy-bg.jpg",
       },
     ];
   },

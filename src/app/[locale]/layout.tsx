@@ -5,6 +5,7 @@ import { Providers } from "@/components/providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { MobileAlert } from "@/components/mobile-alert";
+import { Toaster } from "@/components/ui/toaster";
 import React from "react";
 
 const nunito = Nunito({
@@ -48,6 +49,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
               <div className="hidden md:block">
                 {children}
               </div>
+              <Toaster />
             </LanguageProvider>
           </Providers>
         </ThemeProvider>

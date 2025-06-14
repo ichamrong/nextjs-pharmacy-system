@@ -1,20 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { ClientWrapper } from "@/components/client-wrapper";
-import { useTranslations } from "next-intl";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface PageHeaderProps {
   title: string;
   description?: string;
   action?: {
     label: string;
-    href: string;
+    href?: string;
+    onClick?: () => void;
     icon?: React.ReactNode;
   };
 }
 
 export function PageHeader({ title, description, action }: PageHeaderProps) {
-  const t = useTranslations("pageHeader");
+  const { t } = useLanguage();
+
+  const handleClick = () => {
+    if (action?.onClick) {
+      action.onClick();
+    } else if (action?.href) {
+      window.location.href = action.href;
+    }
+  };
 
   return (
     <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-6 flex items-center justify-between">
@@ -30,7 +39,7 @@ export function PageHeader({ title, description, action }: PageHeaderProps) {
       </div>
       {action && (
         <Button 
-          onClick={() => window.location.href = action.href}
+          onClick={handleClick}
           className="bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
         >
           {action.icon || <Plus className="h-4 w-4" />}

@@ -11,16 +11,17 @@ import { ClientWrapper } from "@/components/client-wrapper";
 interface Column<T> {
   header: string;
   accessorKey: keyof T;
-  cell?: (item: T) => React.ReactNode;
+  cell?: (props: { row: { original: T } }) => React.ReactNode;
 }
 
 interface DataTableProps<T> {
   columns: Column<T>[];
   data: T[];
   isLoading?: boolean;
+  className?: string;
 }
 
-export function DataTable<T>({ columns, data, isLoading }: DataTableProps<T>) {
+export function DataTable<T>({ columns, data, isLoading, className }: DataTableProps<T>) {
   if (isLoading) {
     return (
       <div className="glass-table p-4 space-y-3">
@@ -33,12 +34,15 @@ export function DataTable<T>({ columns, data, isLoading }: DataTableProps<T>) {
   }
 
   return (
-    <div className="glass-table">
+    <div className={className}>
       <Table>
         <TableHeader>
-          <TableRow className="glass-table-header">
+          <TableRow className="border-b border-gray-200 bg-gray-50/50">
             {columns.map((column) => (
-              <TableHead key={String(column.accessorKey)} className="text-white/80">
+              <TableHead 
+                key={String(column.accessorKey)} 
+                className="text-gray-700 font-medium py-3.5 px-4"
+              >
                 <ClientWrapper>{column.header}</ClientWrapper>
               </TableHead>
             ))}
@@ -46,11 +50,17 @@ export function DataTable<T>({ columns, data, isLoading }: DataTableProps<T>) {
         </TableHeader>
         <TableBody>
           {data.map((item, index) => (
-            <TableRow key={index} className="glass-table-row">
+            <TableRow 
+              key={index} 
+              className="border-b border-gray-100 hover:bg-gray-50/50 transition-colors"
+            >
               {columns.map((column) => (
-                <TableCell key={String(column.accessorKey)} className="text-white/70">
+                <TableCell 
+                  key={String(column.accessorKey)} 
+                  className="text-gray-600 py-3.5 px-4"
+                >
                   {column.cell ? (
-                    column.cell(item)
+                    column.cell({ row: { original: item } })
                   ) : (
                     <ClientWrapper>
                       {String(item[column.accessorKey])}

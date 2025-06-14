@@ -109,8 +109,9 @@
     },
     "dashboard": "Dashboard",
     "users": "Users",
-    "categories": "Categories",
+    "catalog": "Catalog",
     "products": "Products",
+    "categories": "Categories",
     "sales": "Sales",
     "receivedStocks": "Received Stocks",
     "issuedStocks": "Issued Stocks",
@@ -244,7 +245,10 @@
     "searchPlaceholder": "Search users...",
     "noResults": "No users found",
     "confirmDelete": "Are you sure you want to delete this user?",
-    "deleteSuccess": "User deleted successfully",
+    "deleteSuccess": {
+      "title": "Success",
+      "message": "User deleted successfully"
+    },
     "deleteError": "Error deleting user",
     "createSuccess": "User created successfully",
     "createError": "Error creating user",
@@ -254,15 +258,18 @@
       "title": "Delete User",
       "message": "Are you sure you want to delete this user? This action cannot be undone."
     },
+    "admin": "Admin",
+    "active": "Active",
     "roles": {
-      "admin": "Administrator",
+      "admin": "Admin",
       "pharmacist": "Pharmacist",
       "cashier": "Cashier"
     },
     "statusTypes": {
       "active": "Active",
       "inactive": "Inactive"
-    }
+    },
+    "filters": "Filters"
   },
   "categories": {
     "title": "Categories",
