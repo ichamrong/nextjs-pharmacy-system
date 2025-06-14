@@ -26,23 +26,24 @@ export function PageHeader({ title, description, action }: PageHeaderProps) {
   };
 
   return (
-    <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-6 flex items-center justify-between">
+    <div className="bg-emerald-50/50 border border-emerald-100/50 rounded-lg p-4 flex items-center justify-between">
       <div>
         <ClientWrapper>
-          <h1 className="text-3xl font-bold text-emerald-900">{title}</h1>
+          <h1 className="text-xl font-semibold text-emerald-900">{title}</h1>
         </ClientWrapper>
         {description && (
           <ClientWrapper>
-            <p className="text-emerald-700 mt-1">{description}</p>
+            <p className="text-emerald-700/80 text-sm mt-0.5">{description}</p>
           </ClientWrapper>
         )}
       </div>
       {action && (
         <Button 
           onClick={handleClick}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2"
+          size="sm"
+          className="bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-1.5 h-8 px-3"
         >
-          {action.icon || <Plus className="h-4 w-4" />}
+          {action.icon || <Plus className="h-3.5 w-3.5" />}
           <ClientWrapper>{t(action.label)}</ClientWrapper>
         </Button>
       )}

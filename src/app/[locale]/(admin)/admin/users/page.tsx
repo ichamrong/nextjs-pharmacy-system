@@ -70,7 +70,7 @@ export default function UsersPage() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   const [users] = useState<User[]>(generateMockUsers());
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -188,34 +188,8 @@ export default function UsersPage() {
 
   const renderPagination = () => {
     const pages = [];
-    const maxVisiblePages = 5;
-
-    if (totalPages <= maxVisiblePages) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) {
-          pages.push(i);
-        }
-        pages.push("ellipsis");
-        pages.push(totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(1);
-        pages.push("ellipsis");
-        for (let i = totalPages - 3; i <= totalPages; i++) {
-          pages.push(i);
-        }
-      } else {
-        pages.push(1);
-        pages.push("ellipsis");
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          pages.push(i);
-        }
-        pages.push("ellipsis");
-        pages.push(totalPages);
-      }
+    for (let i = 1; i <= totalPages; i++) {
+      pages.push(i);
     }
 
     return (
@@ -235,10 +209,10 @@ export default function UsersPage() {
               key={page}
               variant={currentPage === page ? "default" : "outline"}
               size="sm"
-              onClick={() => handlePageChange(page as number)}
+              onClick={() => handlePageChange(page)}
               className={`min-w-[32px] h-8 px-2 ${
                 currentPage === page
-                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  ? "bg-emerald-600 text-white hover:bg-emerald-700"
                   : "border-gray-200 hover:bg-gray-100"
               }`}
             >
@@ -281,7 +255,7 @@ export default function UsersPage() {
           className="w-full sm:w-64"
         />
         <div className="w-full sm:w-auto flex justify-end">
-          <FilterDrawer 
+          <FilterDrawer
             title={t("users.filters")}
             onApply={() => {
               // Apply filters
@@ -363,30 +337,29 @@ export default function UsersPage() {
             accessorKey: "role",
             cell: ({ row }) => (
               <ClientWrapper>
-                {t(`users.roles.${row.original.role}`)}
+                <Badge className="capitalize">
+                  {t(`users.roles.${row.original.role}`)}
+                </Badge>
               </ClientWrapper>
             ),
           },
           {
             header: t("users.status"),
             accessorKey: "status",
-            cell: ({ row }) => {
-              const status = row.original.status;
-              return (
+            cell: ({ row }) => (
+              <ClientWrapper>
                 <Badge
                   variant="outline"
                   className={`capitalize ${
-                    status === "active"
-                      ? "bg-green-100 text-green-800 border-green-200"
-                      : "bg-red-100 text-red-800 border-red-200"
+                    row.original.status === "active"
+                      ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                      : "bg-red-50 text-red-700 border-red-200"
                   }`}
                 >
-                  <ClientWrapper>
-                    {t(`users.${status}`)}
-                  </ClientWrapper>
+                  {t(`users.${row.original.status}`)}
                 </Badge>
-              );
-            },
+              </ClientWrapper>
+            ),
           },
           {
             header: t("users.lastLogin"),
@@ -405,17 +378,20 @@ export default function UsersPage() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="h-8 w-8 p-0 hover:bg-gray-100 rounded-full"
+                    className="h-8 w-8 p-0 hover:bg-emerald-50/50 rounded-full"
                   >
-                    <MoreVertical className="h-4 w-4" />
+                    <MoreVertical className="h-4 w-4 text-gray-500" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-[160px]">
+                <DropdownMenuContent
+                  align="end"
+                  className="w-[160px] bg-white shadow-lg rounded-lg border-0 py-1"
+                >
                   <DropdownMenuItem
                     onClick={() =>
                       router.push(`/${locale}/admin/users/${row.original.id}`)
                     }
-                    className="cursor-pointer hover:bg-gray-100"
+                    className="cursor-pointer hover:bg-emerald-50/50 px-3 py-2 text-sm text-gray-700"
                   >
                     <Eye className="mr-2 h-4 w-4 text-gray-500" />
                     <span>{t("users.view")}</span>
@@ -426,16 +402,16 @@ export default function UsersPage() {
                         `/${locale}/admin/users/${row.original.id}/edit`,
                       )
                     }
-                    className="cursor-pointer hover:bg-gray-100"
+                    className="cursor-pointer hover:bg-emerald-50/50 px-3 py-2 text-sm text-gray-700"
                   >
                     <Edit className="mr-2 h-4 w-4 text-gray-500" />
                     <span>{t("users.edit")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => handleDelete(row.original.id)}
-                    className="cursor-pointer text-red-600 hover:bg-red-50 hover:text-red-600"
+                    className="cursor-pointer hover:bg-emerald-50/50 px-3 py-2 text-sm text-red-600"
                   >
-                    <Trash className="mr-2 h-4 w-4" />
+                    <Trash className="mr-2 h-4 w-4 text-red-600" />
                     <span>{t("users.delete")}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
