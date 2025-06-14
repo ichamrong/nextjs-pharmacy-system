@@ -1,12 +1,22 @@
 "use client";
 
 import { AlertCircle } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FaAndroid } from "react-icons/fa";
 import { FaApple } from "react-icons/fa";
 
 export function MobileAlert() {
   const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-background p-4 md:hidden">

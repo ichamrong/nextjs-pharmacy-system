@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import enTranslations from "@/i18n/locales/en.json";
 import kmTranslations from "@/i18n/locales/km.json";
+import { useParams, useRouter } from "next/navigation";
 
 type Language = "en" | "km";
 
@@ -10,7 +11,6 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
-  isLoading: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -18,55 +18,42 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en");
-  const [isLoading, setIsLoading] = useState(true);
+  const params = useParams();
+  const router = useRouter();
+  const [language, setLanguageState] = useState<Language>((params?.locale as Language) || "en");
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Load saved language preference from localStorage
-    const savedLanguage = localStorage.getItem("language") as Language;
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    }
-    setIsLoading(false);
+    setIsClient(true);
   }, []);
 
-  // Update document properties when language changes
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.lang = language;
-      document.body.className =
-        language === "km" ? "font-khmer" : "font-english";
-    }
-  }, [language]);
-
-  const handleSetLanguage = (lang: Language) => {
-    setLanguage(lang);
-    localStorage.setItem("language", lang);
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    // Update the URL with the new locale
+    const currentPath = window.location.pathname;
+    const newPath = currentPath.replace(/^\/[^\/]+/, `/${lang}`);
+    router.push(newPath);
   };
 
   const t = (key: string): string => {
-    const translations = language === "en" ? enTranslations : kmTranslations;
-    const keys = key.split(".");
-    let value: Record<string, unknown> = translations;
-
-    for (const k of keys) {
-      if (value && typeof value === "object" && k in value) {
-        value = value[k] as Record<string, unknown>;
-      } else {
-        return key; // Return the key if translation is not found
-      }
+    if (!isClient) {
+      // During SSR, use the initial language from params
+      const translations = (params?.locale as Language) === 'km' ? kmTranslations : enTranslations;
+      const value = key.split('.').reduce((obj: Record<string, unknown>, k) => obj?.[k] as Record<string, unknown>, translations);
+      return typeof value === 'string' ? value : key;
     }
 
-    return typeof value === "string" ? value : key;
+    const translations = language === 'km' ? kmTranslations : enTranslations;
+    const value = key.split('.').reduce((obj: Record<string, unknown>, k) => obj?.[k] as Record<string, unknown>, translations);
+    return typeof value === 'string' ? value : key;
   };
 
   return (
     <LanguageContext.Provider
       value={{
         language,
-        setLanguage: handleSetLanguage,
+        setLanguage,
         t,
-        isLoading,
       }}
     >
       {children}

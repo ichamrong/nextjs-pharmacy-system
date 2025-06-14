@@ -8,52 +8,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
 type Language = 'en' | 'km';
 
 export default function Home() {
-  const { t, language, setLanguage, isLoading } = useLanguage();
-
-  if (isLoading) {
-    return (
-      <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div className="container mx-auto px-4 py-16">
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <Card className="w-full border-none shadow-xl bg-white">
-              <CardHeader className="space-y-1">
-                <div className="h-8 w-48 bg-gray-200 animate-pulse rounded" />
-                <div className="h-4 w-64 bg-gray-200 animate-pulse rounded" />
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-end">
-                  <div className="h-10 w-[120px] bg-gray-200 animate-pulse rounded" />
-                </div>
-                <div className="space-y-2">
-                  <div className="h-4 w-24 bg-gray-200 animate-pulse rounded" />
-                  <div className="h-10 w-full bg-gray-200 animate-pulse rounded" />
-                </div>
-                <div className="space-y-2">
-                  <div className="h-4 w-24 bg-gray-200 animate-pulse rounded" />
-                  <div className="h-10 w-full bg-gray-200 animate-pulse rounded" />
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <div className="h-4 w-4 bg-gray-200 animate-pulse rounded" />
-                    <div className="h-4 w-24 bg-gray-200 animate-pulse rounded" />
-                  </div>
-                  <div className="h-4 w-32 bg-gray-200 animate-pulse rounded" />
-                </div>
-              </CardContent>
-              <CardFooter className="flex flex-col space-y-4">
-                <div className="h-10 w-full bg-gray-200 animate-pulse rounded" />
-                <div className="h-4 w-48 bg-gray-200 animate-pulse rounded" />
-              </CardFooter>
-            </Card>
-          </div>
-        </div>
-      </main>
-    );
-  }
+  const { t, language, setLanguage } = useLanguage();
+  const params = useParams();
+  const locale = params.locale as string;
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -141,7 +103,7 @@ export default function Home() {
                     {t('common.rememberMe')}
                   </Label>
                 </div>
-                <Link href="/reset-password" className="text-sm text-indigo-600 hover:text-indigo-500">
+                <Link href={`/${locale}/reset-password`} className="text-sm text-indigo-600 hover:text-indigo-500">
                   {t('common.forgotPassword')}
                 </Link>
               </div>
@@ -152,7 +114,7 @@ export default function Home() {
               </Button>
               <p className="text-sm text-gray-600 text-center">
                 {t('common.noAccount')}{' '}
-                <Link href="/contact" className="text-indigo-600 hover:text-indigo-500">
+                <Link href={`/${locale}/contact`} className="text-indigo-600 hover:text-indigo-500">
                   {t('common.contactAdmin')}
                 </Link>
               </p>

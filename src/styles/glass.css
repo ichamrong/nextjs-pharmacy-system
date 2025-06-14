@@ -1,0 +1,63 @@
+@layer utilities {
+  .glass {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg;
+  }
+
+  .glass-card {
+    @apply glass rounded-xl p-6 transition-all duration-300 hover:bg-white/20;
+  }
+
+  .glass-button {
+    @apply glass rounded-lg px-4 py-2 transition-all duration-300 
+           hover:bg-white/20 active:scale-95;
+  }
+
+  .glass-input {
+    @apply glass rounded-lg px-4 py-2 w-full transition-all duration-300
+           focus:bg-white/20 focus:ring-2 focus:ring-white/30;
+  }
+
+  .glass-nav {
+    @apply glass rounded-xl p-2 transition-all duration-300;
+  }
+
+  .glass-table {
+    @apply glass rounded-xl overflow-hidden;
+  }
+
+  .glass-table-header {
+    @apply bg-white/5 backdrop-blur-md;
+  }
+
+  .glass-table-row {
+    @apply transition-all duration-300 hover:bg-white/10;
+  }
+
+  .glass-modal {
+    @apply glass rounded-2xl p-6 max-w-lg mx-auto;
+  }
+
+  .glass-dropdown {
+    @apply glass rounded-lg p-2 min-w-[200px];
+  }
+
+  .glass-tooltip {
+    @apply glass rounded-lg px-3 py-1.5 text-sm;
+  }
+
+  .glass-badge {
+    @apply glass rounded-full px-3 py-1 text-xs font-medium;
+  }
+
+  .glass-avatar {
+    @apply glass rounded-full p-1;
+  }
+
+  .glass-divider {
+    @apply h-px bg-white/20 my-4;
+  }
+
+  .glass-scrollbar {
+    @apply scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent;
+  }
+} 

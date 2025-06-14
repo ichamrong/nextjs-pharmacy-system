@@ -24,7 +24,15 @@
     "no": "No",
     "actions": "Actions",
     "edit": "Edit",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "create": "Create",
+    "search": "Search",
+    "noResults": "No results found",
+    "success": "Success",
+    "appName": "Pharmacy Management System",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
   },
   "resetPassword": {
     "title": "Reset Password",
@@ -64,6 +72,7 @@
     "navigation": {
       "dashboard": "Dashboard",
       "users": "Users",
+      "categories": "Categories",
       "products": "Products",
       "orders": "Orders",
       "settings": "Settings",
@@ -72,7 +81,7 @@
   },
   "mobile": {
     "title": "Desktop Only",
-    "description": "This web application is optimized for tablet and desktop screens. Please download our mobile app for the best experience on your device."
+    "description": "This application is designed for desktop use. Please access it from a computer for the best experience."
   },
   "settings": {
     "title": "Settings",
@@ -182,17 +191,30 @@
   },
   "users": {
     "title": "Users",
+    "add": "Add User",
     "addNew": "Add New User",
     "edit": "Edit User",
     "name": "Name",
     "email": "Email",
     "role": "Role",
     "status": "Status",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions",
+    "search": "Search users...",
     "searchPlaceholder": "Search users...",
-    "namePlaceholder": "Enter name",
-    "emailPlaceholder": "Enter email",
-    "selectRole": "Select role",
-    "selectStatus": "Select status",
+    "noResults": "No users found",
+    "confirmDelete": "Are you sure you want to delete this user?",
+    "deleteSuccess": "User deleted successfully",
+    "deleteError": "Error deleting user",
+    "createSuccess": "User created successfully",
+    "createError": "Error creating user",
+    "updateSuccess": "User updated successfully",
+    "updateError": "Error updating user",
+    "deleteConfirm": {
+      "title": "Delete User",
+      "message": "Are you sure you want to delete this user? This action cannot be undone."
+    },
     "roles": {
       "admin": "Administrator",
       "pharmacist": "Pharmacist",
@@ -201,31 +223,36 @@
     "statusTypes": {
       "active": "Active",
       "inactive": "Inactive"
-    },
-    "notFound": "User not found",
-    "fetchError": "Failed to fetch user data",
-    "updateSuccess": {
-      "title": "Success",
-      "message": "User updated successfully"
-    },
-    "updateError": {
-      "message": "Failed to update user"
-    },
-    "cancelConfirm": {
-      "title": "Discard Changes?",
-      "message": "Are you sure you want to discard your changes?"
-    },
-    "deleteConfirm": {
-      "title": "Delete User",
-      "message": "Are you sure you want to delete this user? This action cannot be undone."
-    },
-    "deleteSuccess": {
-      "title": "Success",
-      "message": "User has been deleted successfully"
-    },
-    "deleteError": {
-      "title": "Error",
-      "message": "Failed to delete user. Please try again."
     }
+  },
+  "categories": {
+    "title": "Categories",
+    "add": "Add Category",
+    "edit": "Edit Category",
+    "name": "Name",
+    "description": "Description",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "actions": "Actions",
+    "save": "Save",
+    "cancel": "Cancel",
+    "create": "Create",
+    "delete": "Delete",
+    "deleteConfirm": "Are you sure you want to delete this category?",
+    "deleteSuccess": "Category deleted successfully",
+    "createSuccess": "Category created successfully",
+    "updateSuccess": "Category updated successfully",
+    "nameRequired": "Name is required",
+    "descriptionRequired": "Description is required"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "categories": "Categories",
+    "products": "Products",
+    "sales": "Sales",
+    "receivedStocks": "Received Stocks",
+    "issuedStocks": "Issued Stocks",
+    "settings": "Settings"
   }
 } 
