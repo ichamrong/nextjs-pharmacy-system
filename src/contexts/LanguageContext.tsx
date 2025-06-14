@@ -20,7 +20,9 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const params = useParams();
   const router = useRouter();
-  const [language, setLanguageState] = useState<Language>((params?.locale as Language) || "en");
+  const [language, setLanguageState] = useState<Language>(
+    (params?.locale as Language) || "en",
+  );
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -38,14 +40,27 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const t = (key: string): string => {
     if (!isClient) {
       // During SSR, use the initial language from params
-      const translations = (params?.locale as Language) === 'km' ? kmTranslations : enTranslations;
-      const value = key.split('.').reduce((obj: Record<string, unknown>, k) => obj?.[k] as Record<string, unknown>, translations);
-      return typeof value === 'string' ? value : key;
+      const translations =
+        (params?.locale as Language) === "km" ? kmTranslations : enTranslations;
+      const value = key
+        .split(".")
+        .reduce(
+          (obj: Record<string, unknown>, k) =>
+            obj?.[k] as Record<string, unknown>,
+          translations,
+        );
+      return typeof value === "string" ? value : key;
     }
 
-    const translations = language === 'km' ? kmTranslations : enTranslations;
-    const value = key.split('.').reduce((obj: Record<string, unknown>, k) => obj?.[k] as Record<string, unknown>, translations);
-    return typeof value === 'string' ? value : key;
+    const translations = language === "km" ? kmTranslations : enTranslations;
+    const value = key
+      .split(".")
+      .reduce(
+        (obj: Record<string, unknown>, k) =>
+          obj?.[k] as Record<string, unknown>,
+        translations,
+      );
+    return typeof value === "string" ? value : key;
   };
 
   return (

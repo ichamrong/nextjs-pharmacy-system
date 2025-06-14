@@ -20,6 +20,7 @@ import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { UserNav } from "@/components/user-nav";
 import { ClientWrapper } from "@/components/client-wrapper";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const navigation = [
   { name: "dashboard", href: "/admin", icon: LayoutDashboard },
@@ -39,6 +40,7 @@ export default function AdminLayout({
 }) {
   const pathname = usePathname();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900">
@@ -47,7 +49,7 @@ export default function AdminLayout({
         <div className="flex grow flex-col gap-y-5 overflow-y-auto glass-nav px-6 pb-4">
           <div className="flex h-16 shrink-0 items-center">
             <ClientWrapper>
-              <h1 className="text-xl font-bold text-white/90">Pharmacy Management System</h1>
+              <h1 className="text-xl font-bold text-white/90">{t('common.appName')}</h1>
             </ClientWrapper>
           </div>
           <nav className="flex flex-1 flex-col">
@@ -74,7 +76,7 @@ export default function AdminLayout({
                           )}
                           aria-hidden="true"
                         />
-                        <ClientWrapper>{item.name}</ClientWrapper>
+                        <ClientWrapper>{t(`admin.${item.name}`)}</ClientWrapper>
                       </Link>
                     </li>
                   ))}
@@ -100,7 +102,7 @@ export default function AdminLayout({
           <div className="flex grow flex-col gap-y-5 overflow-y-auto px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
               <ClientWrapper>
-                <h1 className="text-xl font-bold text-white/90">Pharmacy Management System</h1>
+                <h1 className="text-xl font-bold text-white/90">{t('common.appName')}</h1>
               </ClientWrapper>
             </div>
             <nav className="flex flex-1 flex-col">
@@ -126,7 +128,7 @@ export default function AdminLayout({
                         )}
                         aria-hidden="true"
                       />
-                      <ClientWrapper>{item.name}</ClientWrapper>
+                      <ClientWrapper>{t(`admin.${item.name}`)}</ClientWrapper>
                     </Link>
                   </li>
                 ))}

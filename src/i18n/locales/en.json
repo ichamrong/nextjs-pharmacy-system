@@ -1,7 +1,7 @@
 {
   "common": {
     "welcome": "Welcome",
-    "signIn": "Sign in to your account",
+    "signIn": "Please sign in to your account",
     "email": "Email",
     "password": "Password",
     "rememberMe": "Remember me",
@@ -32,25 +32,40 @@
     "appName": "Pharmacy Management System",
     "profile": "Profile",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "welcomeMessage": "Welcome to",
+    "welcomeDescription": "Your trusted partner in healthcare management",
+    "service24_7": "24/7 Service",
+    "service24_7Number": "24/7",
+    "service24_7Description": "Round-the-clock pharmacy services for your convenience",
+    "qualityGuarantee": "Quality Guarantee",
+    "qualityGuaranteeNumber": "100%",
+    "qualityGuaranteeDescription": "We ensure the highest quality of medications and healthcare products",
+    "professionalService": "Professional Service",
+    "professionalServiceDescription": "Expert healthcare professionals at your service",
+    "skilledStaff": "Skilled Staff",
+    "skilledStaffDescription": "Our team consists of qualified pharmacists and healthcare experts",
+    "resetPassword": "Reset Password",
+    "resetPasswordDescription": "Enter your email address and we'll send you a link to reset your password.",
+    "sendResetLink": "Send Reset Link",
+    "rememberPassword": "Remember your password?",
+    "backToSignIn": "Back to Sign In"
   },
   "resetPassword": {
     "title": "Reset Password",
-    "description": "Enter your email address and we'll send you a link to reset your password.",
-    "sendResetLink": "Send Reset Link",
+    "description": "Please enter your email address and we'll send you a link to reset your password",
+    "emailPlaceholder": "Enter your email address",
+    "sendLink": "Send Reset Link",
     "rememberPassword": "Remember your password?",
-    "backToLogin": "Back to login"
+    "backToLogin": "Back to Login"
   },
   "contact": {
-    "title": "Contact Admin",
-    "description": "Fill out the form below to request an account or get help.",
-    "firstName": "First Name",
-    "lastName": "Last Name",
+    "title": "Contact Us",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
     "message": "Message",
-    "messagePlaceholder": "Tell us why you need an account or what help you need...",
-    "sendMessage": "Send Message",
-    "haveAccount": "Already have an account?",
-    "backToLogin": "Back to login"
+    "send": "Send Message"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -77,7 +92,12 @@
       "orders": "Orders",
       "settings": "Settings",
       "logout": "Logout"
-    }
+    },
+    "dashboard": "Dashboard",
+    "inventory": "Inventory",
+    "sales": "Sales",
+    "users": "Users",
+    "settings": "Settings"
   },
   "mobile": {
     "title": "Desktop Only",
@@ -253,6 +273,24 @@
     "sales": "Sales",
     "receivedStocks": "Received Stocks",
     "issuedStocks": "Issued Stocks",
-    "settings": "Settings"
+    "settings": "Settings",
+    "home": "Home",
+    "orders": "Orders",
+    "customers": "Customers",
+    "reports": "Reports"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "forgotPassword": "Forgot Password",
+    "resetPassword": "Reset Password",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "loginDescription": "Enter your credentials to access your account",
+    "rememberPassword": "Remember your password?",
+    "backToLogin": "Back to login",
+    "resetPasswordDescription": "Enter your email address and we'll send you a link to reset your password"
   }
 } 

@@ -45,8 +45,6 @@
 
 @layer base {
   :root {
-    --font-nunito: 'Nunito', sans-serif;
-    --font-koh-santepheap: "Koh Santepheap";
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -75,6 +73,7 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-nunito, "Nunito"), var(--font-koh-santepheap, "Koh Santepheap"), sans-serif !important;
   }
 
   .dark {
@@ -113,10 +112,11 @@
   }
 }
 
-.kohSantepheap {
-  font-family: "Koh Santepheap", sans-serif;
+/* Utility classes for specific font usage */
+.font-nunito {
+  font-family: var(--font-nunito, "Nunito"), sans-serif;
 }
 
-.nunito {
-  font-family: "Nunito", sans-serif;
+.font-koh-santepheap {
+  font-family: var(--font-koh-santepheap, "Koh Santepheap"), sans-serif;
 }

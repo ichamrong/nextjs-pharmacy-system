@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
-import { Nunito, Koh_Santepheap } from "next/font/google";
 import "../globals.css";
+import { Nunito, Koh_Santepheap } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { MobileAlert } from "@/components/mobile-alert";
 import React from "react";
 
-const Layout = 
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-nunito",
+});
+
+const kohSantepheap = Koh_Santepheap({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-koh-santepheap",
+});
 
 export const metadata: Metadata = {
   title: "Pharmacy Management System",
@@ -24,7 +33,7 @@ export default async function RootLayout({ children, params }: LayoutProps) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${Nunito.className} ${Koh_Santepheap.className}`}>
+      <body className={`${nunito.variable} ${kohSantepheap.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -33,8 +42,12 @@ export default async function RootLayout({ children, params }: LayoutProps) {
         >
           <Providers>
             <LanguageProvider>
-              <MobileAlert />
-              {children}
+              <div className="md:hidden">
+                <MobileAlert />
+              </div>
+              <div className="hidden md:block">
+                {children}
+              </div>
             </LanguageProvider>
           </Providers>
         </ThemeProvider>
