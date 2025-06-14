@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -17,31 +17,73 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import Swal from "sweetalert2";
+import { use } from "react";
 
-export default function NewUserPage() {
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "pharmacist" | "cashier";
+  status: "active" | "inactive";
+  lastLogin: string;
+}
+
+export default function EditUserPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
   const router = useRouter();
   const { t, locale } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<User>({
+    id: "",
     name: "",
     email: "",
-    password: "",
-    role: "",
+    role: "admin",
     status: "active",
+    lastLogin: "",
   });
+
+  useEffect(() => {
+    // Fetch user data
+    const fetchUser = async () => {
+      setIsLoading(true);
+      try {
+        // TODO: Replace with actual API call
+        // Mock data for now
+        const mockUser: User = {
+          id: resolvedParams.id,
+          name: "John Doe",
+          email: "john@example.com",
+          role: "admin",
+          status: "active",
+          lastLogin: new Date().toISOString(),
+        };
+        setFormData(mockUser);
+      } catch {
+        Swal.fire({
+          title: t("users.fetchError"),
+          text: t("users.fetchErrorDescription"),
+          icon: "error",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [resolvedParams.id, t]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     try {
-      // Handle create user logic here
-      console.log("Create user:", formData);
-      
+      // Handle update user logic here
+      console.log("Update user:", formData);
+
       // Show success message
       await Swal.fire({
-        title: t("users.createSuccess"),
-        text: t("users.userCreated"),
+        title: t("users.updateSuccess"),
+        text: t("users.userUpdated"),
         icon: "success",
         timer: 2000,
         showConfirmButton: false,
@@ -52,8 +94,8 @@ export default function NewUserPage() {
     } catch {
       // Show error message
       Swal.fire({
-        title: t("users.createError"),
-        text: t("users.createErrorDescription"),
+        title: t("users.updateError"),
+        text: t("users.updateErrorDescription"),
         icon: "error",
       });
     } finally {
@@ -66,26 +108,33 @@ export default function NewUserPage() {
   };
 
   return (
-    <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
+    <div className="space-y-6">
       <PageHeader
-        title={t("users.addNew")}
-        description={t("users.addNewDescription")}
+        title={t("users.edit")}
+        description={t("users.editDescription")}
         action={{
           label: t("common.back"),
           onClick: handleCancel,
-          icon: <ArrowLeft className="mr-2 h-4 w-4" />
+          icon: <ArrowLeft className="mr-2 h-4 w-4" />,
         }}
       />
 
       <Card className="border-gray-100 shadow-sm">
         <CardHeader className="border-b border-gray-100 bg-gray-50">
-          <CardTitle className="text-lg font-medium text-gray-900">{t("users.userInformation")}</CardTitle>
+          <CardTitle className="text-lg font-medium text-gray-900">
+            {t("users.userInformation")}
+          </CardTitle>
         </CardHeader>
         <CardContent className="pt-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="name" className="text-sm font-medium text-gray-700">{t("users.name")}</Label>
+                <Label
+                  htmlFor="name"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  {t("users.name")}
+                </Label>
                 <Input
                   id="name"
                   value={formData.name}
@@ -99,7 +148,12 @@ export default function NewUserPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-gray-700">{t("users.email")}</Label>
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  {t("users.email")}
+                </Label>
                 <Input
                   id="email"
                   type="email"
@@ -114,30 +168,23 @@ export default function NewUserPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium text-gray-700">{t("users.password")}</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
-                  placeholder={t("users.passwordPlaceholder")}
-                  required
-                  className="border-gray-200 focus:border-gray-300 focus:ring-gray-300"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="role" className="text-sm font-medium text-gray-700">{t("users.role")}</Label>
+                <Label
+                  htmlFor="role"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  {t("users.role")}
+                </Label>
                 <Select
                   value={formData.role}
                   onValueChange={(value) =>
-                    setFormData({ ...formData, role: value })
+                    setFormData({ ...formData, role: value as User["role"] })
                   }
                   required
                 >
-                  <SelectTrigger id="role" className="border-gray-200 focus:border-gray-300 focus:ring-gray-300">
+                  <SelectTrigger
+                    id="role"
+                    className="border-gray-200 focus:border-gray-300 focus:ring-gray-300"
+                  >
                     <SelectValue placeholder={t("users.selectRole")} />
                   </SelectTrigger>
                   <SelectContent>
@@ -145,20 +192,33 @@ export default function NewUserPage() {
                     <SelectItem value="pharmacist">
                       {t("users.pharmacist")}
                     </SelectItem>
-                    <SelectItem value="cashier">{t("users.cashier")}</SelectItem>
+                    <SelectItem value="cashier">
+                      {t("users.cashier")}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="status" className="text-sm font-medium text-gray-700">{t("users.status")}</Label>
+                <Label
+                  htmlFor="status"
+                  className="text-sm font-medium text-gray-700"
+                >
+                  {t("users.status")}
+                </Label>
                 <Select
                   value={formData.status}
                   onValueChange={(value) =>
-                    setFormData({ ...formData, status: value })
+                    setFormData({
+                      ...formData,
+                      status: value as User["status"],
+                    })
                   }
                 >
-                  <SelectTrigger id="status" className="border-gray-200 focus:border-gray-300 focus:ring-gray-300">
+                  <SelectTrigger
+                    id="status"
+                    className="border-gray-200 focus:border-gray-300 focus:ring-gray-300"
+                  >
                     <SelectValue placeholder={t("users.selectStatus")} />
                   </SelectTrigger>
                   <SelectContent>
@@ -168,6 +228,17 @@ export default function NewUserPage() {
                     </SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label className="text-sm font-medium text-gray-700">
+                  {t("users.lastLogin")}
+                </Label>
+                <div className="text-sm text-gray-500">
+                  {formData.lastLogin
+                    ? new Date(formData.lastLogin).toLocaleString()
+                    : t("users.never")}
+                </div>
               </div>
             </div>
 
@@ -181,8 +252,8 @@ export default function NewUserPage() {
               >
                 {t("common.cancel")}
               </Button>
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 disabled={isLoading}
                 className="bg-blue-600 hover:bg-blue-700 text-white"
               >
@@ -194,4 +265,4 @@ export default function NewUserPage() {
       </Card>
     </div>
   );
-} 
+}

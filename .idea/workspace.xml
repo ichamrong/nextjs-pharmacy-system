@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d1693af6-d710-4e8b-9fa1-95401a75e7ac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/[id]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/new/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/new/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/filter-drawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/filter-drawer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/i18n/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/locales/en.json" afterDir="false" />
@@ -117,7 +119,7 @@
       <workItem from="1749706913559" duration="47000" />
       <workItem from="1749706970218" duration="1706000" />
       <workItem from="1749738119112" duration="6047000" />
-      <workItem from="1749792594633" duration="20363000" />
+      <workItem from="1749792594633" duration="23110000" />
     </task>
     <servers />
   </component>

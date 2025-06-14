@@ -56,7 +56,10 @@
     "resetPasswordDescription": "Enter your email address and we'll send you a link to reset your password.",
     "sendResetLink": "Send Reset Link",
     "rememberPassword": "Remember your password?",
-    "backToSignIn": "Back to Sign In"
+    "backToSignIn": "Back to Sign In",
+    "close": "Close",
+    "reset": "Reset",
+    "apply": "Apply"
   },
   "resetPassword": {
     "title": "Reset Password",
@@ -282,7 +285,19 @@
     "delete": "Delete",
     "deleteConfirmTitle": "Delete User",
     "deleteConfirmText": "Are you sure you want to delete this user? This action cannot be undone.",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "addNewDescription": "Create a new user account in the system",
+    "userInformation": "User Information",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "namePlaceholder": "Enter full name",
+    "emailPlaceholder": "Enter email address",
+    "userCreated": "User has been created successfully",
+    "createErrorDescription": "Failed to create user. Please try again.",
+    "userUpdated": "User has been updated successfully",
+    "viewUser": "View User",
+    "viewUserDescription": "View user details and information",
+    "userNotFound": "User not found"
   },
   "categories": {
     "title": "Categories",

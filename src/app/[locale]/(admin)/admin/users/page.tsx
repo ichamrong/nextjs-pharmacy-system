@@ -12,7 +12,7 @@ import { FilterDrawer } from "@/components/layout/filter-drawer";
 import { Edit, Trash, UserPlus, MoreVertical, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
+import { ClientWrapper } from "@/components/client-wrapper";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,77 +36,41 @@ interface User {
   lastLogin: string;
 }
 
+// Generate mock data
+const generateMockUsers = (): User[] => {
+  const roles: User["role"][] = ["admin", "pharmacist", "cashier"];
+  const statuses: User["status"][] = ["active", "inactive"];
+  const users: User[] = [];
+
+  for (let i = 1; i <= 50; i++) {
+    const role = roles[Math.floor(Math.random() * roles.length)];
+    const status = statuses[Math.floor(Math.random() * statuses.length)];
+    const lastLogin = new Date(
+      Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000,
+    ).toISOString();
+
+    users.push({
+      id: i.toString(),
+      name: `User ${i}`,
+      email: `user${i}@example.com`,
+      role,
+      status,
+      lastLogin,
+    });
+  }
+
+  return users;
+};
+
 export default function UsersPage() {
   const router = useRouter();
   const { t, locale } = useLanguage();
   const [searchQuery, setSearchQuery] = useState("");
   const [roleFilter, setRoleFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const users: User[] = [
-    {
-      id: "1",
-      name: "John Doe",
-      email: "john@example.com",
-      role: "admin",
-      status: "active",
-      lastLogin: "2024-03-20T10:30:00Z",
-    },
-    // Add more mock users as needed
-  ];
-
-  const filteredUsers = users.filter((user) => {
-    const matchesSearch =
-      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesRole = roleFilter === "all" || user.role === roleFilter;
-    const matchesStatus =
-      statusFilter === "all" || user.status === statusFilter;
-    return matchesSearch && matchesRole && matchesStatus;
-  });
-
-  const handleDelete = async (id: string) => {
-    const result = await Swal.fire({
-      title: t("users.deleteConfirmTitle"),
-      text: t("users.deleteConfirmText"),
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: t("users.delete"),
-      cancelButtonText: t("users.cancel"),
-      confirmButtonColor: "#ef4444",
-      customClass: {
-        popup: "rounded-lg",
-        confirmButton: "rounded-md",
-        cancelButton: "rounded-md",
-      },
-    });
-
-    if (result.isConfirmed) {
-      setIsLoading(true);
-      try {
-        // Handle delete logic here
-        console.log("Delete user:", id);
-        // Show success message
-        Swal.fire({
-          title: t("users.deleteSuccess"),
-          text: t("users.userDeleted"),
-          icon: "success",
-          timer: 2000,
-          showConfirmButton: false,
-        });
-      } catch {
-        // Show error message
-        Swal.fire({
-          title: t("users.deleteError"),
-          text: t("users.deleteErrorDescription"),
-          icon: "error",
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [users] = useState<User[]>(generateMockUsers());
+  const itemsPerPage = 10;
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -163,6 +127,140 @@ export default function UsersPage() {
     });
   };
 
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch =
+      user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesRole = roleFilter === "all" || user.role === roleFilter;
+    const matchesStatus =
+      statusFilter === "all" || user.status === statusFilter;
+    return matchesSearch && matchesRole && matchesStatus;
+  });
+
+  // Calculate pagination
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentUsers = filteredUsers.slice(startIndex, endIndex);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleDelete = async (id: string) => {
+    const result = await Swal.fire({
+      title: t("users.deleteConfirmTitle"),
+      text: t("users.deleteConfirmText"),
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: t("users.delete"),
+      cancelButtonText: t("users.cancel"),
+      confirmButtonColor: "#ef4444",
+      customClass: {
+        popup: "rounded-lg",
+        confirmButton: "rounded-md",
+        cancelButton: "rounded-md",
+      },
+    });
+
+    if (result.isConfirmed) {
+      try {
+        // Handle delete logic here
+        console.log("Delete user:", id);
+        // Show success message
+        Swal.fire({
+          title: t("users.deleteSuccess"),
+          text: t("users.userDeleted"),
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      } catch {
+        // Show error message
+        Swal.fire({
+          title: t("users.deleteError"),
+          text: t("users.deleteErrorDescription"),
+          icon: "error",
+        });
+      }
+    }
+  };
+
+  const renderPagination = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) {
+          pages.push(i);
+        }
+        pages.push("ellipsis");
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push("ellipsis");
+        for (let i = totalPages - 3; i <= totalPages; i++) {
+          pages.push(i);
+        }
+      } else {
+        pages.push(1);
+        pages.push("ellipsis");
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pages.push(i);
+        }
+        pages.push("ellipsis");
+        pages.push(totalPages);
+      }
+    }
+
+    return (
+      <div className="flex items-center justify-center space-x-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+          disabled={currentPage === 1}
+          className="border-gray-200 hover:bg-gray-100 disabled:opacity-50"
+        >
+          {t("common.previous")}
+        </Button>
+        <div className="flex items-center space-x-1">
+          {pages.map((page) => (
+            <Button
+              key={page}
+              variant={currentPage === page ? "default" : "outline"}
+              size="sm"
+              onClick={() => handlePageChange(page as number)}
+              className={`min-w-[32px] h-8 px-2 ${
+                currentPage === page
+                  ? "bg-blue-600 text-white hover:bg-blue-700"
+                  : "border-gray-200 hover:bg-gray-100"
+              }`}
+            >
+              {page}
+            </Button>
+          ))}
+        </div>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() =>
+            handlePageChange(Math.min(totalPages, currentPage + 1))
+          }
+          disabled={currentPage === totalPages}
+          className="border-gray-200 hover:bg-gray-100 disabled:opacity-50"
+        >
+          {t("common.next")}
+        </Button>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-6 bg-white p-6 rounded-lg shadow-sm">
       <PageHeader
@@ -183,11 +281,19 @@ export default function UsersPage() {
           className="w-full sm:w-64"
         />
         <div className="w-full sm:w-auto flex justify-end">
-          <FilterDrawer title={t("users.filters")}>
-            <div className="space-y-6 p-4">
-              <p className="text-sm text-gray-500">
-                {t("users.filterDescription")}
-              </p>
+          <FilterDrawer 
+            title={t("users.filters")}
+            onApply={() => {
+              // Apply filters
+              setCurrentPage(1);
+            }}
+            onReset={() => {
+              setRoleFilter("all");
+              setStatusFilter("all");
+              setCurrentPage(1);
+            }}
+          >
+            <div className="space-y-6">
               <div className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="role-filter" className="text-sm font-medium">
@@ -210,8 +316,6 @@ export default function UsersPage() {
                   </Select>
                 </div>
               </div>
-
-              <Separator />
 
               <div className="space-y-4">
                 <div className="space-y-2">
@@ -249,69 +353,48 @@ export default function UsersPage() {
           {
             header: t("users.name"),
             accessorKey: "name",
-            cell: ({ row }) => (
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                  <span className="text-lg font-medium text-white">
-                    {row.original.name.charAt(0).toUpperCase()}
-                  </span>
-                </div>
-                <div>
-                  <div className="font-medium text-gray-900">
-                    {row.original.name}
-                  </div>
-                  <div className="text-sm text-gray-500">
-                    {row.original.email}
-                  </div>
-                </div>
-              </div>
-            ),
+          },
+          {
+            header: t("users.email"),
+            accessorKey: "email",
           },
           {
             header: t("users.role"),
             accessorKey: "role",
             cell: ({ row }) => (
-              <Badge
-                variant={
-                  row.original.role === "admin" ? "default" : "secondary"
-                }
-                className={`${
-                  row.original.role === "admin"
-                    ? "bg-blue-100 text-blue-700"
-                    : row.original.role === "pharmacist"
-                      ? "bg-purple-100 text-purple-700"
-                      : "bg-gray-100 text-gray-700"
-                }`}
-              >
-                {t(`users.${row.original.role}`)}
-              </Badge>
+              <ClientWrapper>
+                {t(`users.roles.${row.original.role}`)}
+              </ClientWrapper>
             ),
           },
           {
             header: t("users.status"),
             accessorKey: "status",
-            cell: ({ row }) => (
-              <Badge
-                variant={
-                  row.original.status === "active" ? "default" : "secondary"
-                }
-                className={`${
-                  row.original.status === "active"
-                    ? "bg-green-100 text-green-700"
-                    : "bg-gray-100 text-gray-700"
-                }`}
-              >
-                {t(`users.${row.original.status}`)}
-              </Badge>
-            ),
+            cell: ({ row }) => {
+              const status = row.original.status;
+              return (
+                <Badge
+                  variant="outline"
+                  className={`capitalize ${
+                    status === "active"
+                      ? "bg-green-100 text-green-800 border-green-200"
+                      : "bg-red-100 text-red-800 border-red-200"
+                  }`}
+                >
+                  <ClientWrapper>
+                    {t(`users.${status}`)}
+                  </ClientWrapper>
+                </Badge>
+              );
+            },
           },
           {
             header: t("users.lastLogin"),
             accessorKey: "lastLogin",
             cell: ({ row }) => (
-              <span className="text-sm text-gray-600">
+              <ClientWrapper>
                 {formatDate(row.original.lastLogin)}
-              </span>
+              </ClientWrapper>
             ),
           },
           {
@@ -324,31 +407,33 @@ export default function UsersPage() {
                     variant="ghost"
                     className="h-8 w-8 p-0 hover:bg-gray-100 rounded-full"
                   >
-                    <span className="sr-only">Open menu</span>
                     <MoreVertical className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  className="w-[160px] bg-white border border-gray-200 shadow-md"
-                >
+                <DropdownMenuContent align="end" className="w-[160px]">
                   <DropdownMenuItem
-                    onClick={() => router.push(`/${locale}/admin/users/${row.original.id}`)}
-                    className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
+                    onClick={() =>
+                      router.push(`/${locale}/admin/users/${row.original.id}`)
+                    }
+                    className="cursor-pointer hover:bg-gray-100"
                   >
                     <Eye className="mr-2 h-4 w-4 text-gray-500" />
-                    <span className="text-gray-700">{t("users.view")}</span>
+                    <span>{t("users.view")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => router.push(`/${locale}/admin/users/${row.original.id}/edit`)}
-                    className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
+                    onClick={() =>
+                      router.push(
+                        `/${locale}/admin/users/${row.original.id}/edit`,
+                      )
+                    }
+                    className="cursor-pointer hover:bg-gray-100"
                   >
                     <Edit className="mr-2 h-4 w-4 text-gray-500" />
-                    <span className="text-gray-700">{t("users.edit")}</span>
+                    <span>{t("users.edit")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => handleDelete(row.original.id)}
-                    className="cursor-pointer hover:bg-red-50 focus:bg-red-50 text-red-600"
+                    className="cursor-pointer text-red-600 hover:bg-red-50 hover:text-red-600"
                   >
                     <Trash className="mr-2 h-4 w-4" />
                     <span>{t("users.delete")}</span>
@@ -358,9 +443,10 @@ export default function UsersPage() {
             ),
           },
         ]}
-        data={filteredUsers}
-        isLoading={isLoading}
+        data={currentUsers}
       />
+
+      <div className="flex justify-center mt-6">{renderPagination()}</div>
     </div>
   );
 }
