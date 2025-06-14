@@ -5,54 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1693af6-d710-4e8b-9fa1-95401a75e7ac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/avatars/default.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/categories/category-dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/categories/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/[locale]/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/client-wrapper.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/data-table.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/page-header.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/search-bar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/providers.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/theme-provider.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/theme-toggle.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/avatar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ui/sheet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/user-nav.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/middleware.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/glass.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/dashboard/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/products/[id]/edit-product-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/products/[id]/edit-product-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/products/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/products/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/products/new/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/products/new/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/products/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/products/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/settings/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/settings/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/users/[id]/edit-user-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/[id]/edit-user-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/users/[id]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/[id]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/users/new/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/users/new/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(admin)/admin/users/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(main)/contact/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(main)/contact/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/(main)/reset-password/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/mobile-alert.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/mobile-alert.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/dropdown-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/dropdown-menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/textarea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/textarea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/contexts/LanguageContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/contexts/LanguageContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/dashboard/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/dashboard/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/[locale]/(admin)/admin/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/page-header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/page-header.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/i18n/locales/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/locales/en.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/i18n/locales/km.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/i18n/locales/km.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +119,7 @@
       <workItem from="1749706913559" duration="47000" />
       <workItem from="1749706970218" duration="1706000" />
       <workItem from="1749738119112" duration="6047000" />
-      <workItem from="1749792594633" duration="14932000" />
+      <workItem from="1749792594633" duration="15831000" />
     </task>
     <servers />
   </component>
@@ -176,5 +136,17 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/contexts/LanguageContext.tsx</url>
+          <line>24</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
