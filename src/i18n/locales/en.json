@@ -278,7 +278,11 @@
     "selectStatus": "Select status",
     "view": "View",
     "userDeleted": "User has been deleted successfully",
-    "deleteErrorDescription": "Failed to delete user. Please try again."
+    "deleteErrorDescription": "Failed to delete user. Please try again.",
+    "delete": "Delete",
+    "deleteConfirmTitle": "Delete User",
+    "deleteConfirmText": "Are you sure you want to delete this user? This action cannot be undone.",
+    "cancel": "Cancel"
   },
   "categories": {
     "title": "Categories",

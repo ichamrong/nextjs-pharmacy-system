@@ -170,7 +170,7 @@ export default function UsersPage() {
         description={t("users.description")}
         action={{
           label: t("users.addNew"),
-          onClick: () => router.push("/admin/users/new"),
+          onClick: () => router.push(`/${locale}/admin/users/new`),
           icon: <UserPlus className="mr-2 h-4 w-4" />,
         }}
       />
@@ -320,34 +320,38 @@ export default function UsersPage() {
             cell: ({ row }) => (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="h-8 w-8 p-0">
+                  <Button
+                    variant="ghost"
+                    className="h-8 w-8 p-0 hover:bg-gray-100 rounded-full"
+                  >
                     <span className="sr-only">Open menu</span>
                     <MoreVertical className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent
+                  align="end"
+                  className="w-[160px] bg-white border border-gray-200 shadow-md"
+                >
                   <DropdownMenuItem
-                    onClick={() =>
-                      router.push(`/admin/users/${row.original.id}`)
-                    }
+                    onClick={() => router.push(`/${locale}/admin/users/${row.original.id}`)}
+                    className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
                   >
-                    <Eye className="mr-2 h-4 w-4" />
-                    {t("users.view")}
+                    <Eye className="mr-2 h-4 w-4 text-gray-500" />
+                    <span className="text-gray-700">{t("users.view")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() =>
-                      router.push(`/admin/users/${row.original.id}/edit`)
-                    }
+                    onClick={() => router.push(`/${locale}/admin/users/${row.original.id}/edit`)}
+                    className="cursor-pointer hover:bg-gray-100 focus:bg-gray-100"
                   >
-                    <Edit className="mr-2 h-4 w-4" />
-                    {t("users.edit")}
+                    <Edit className="mr-2 h-4 w-4 text-gray-500" />
+                    <span className="text-gray-700">{t("users.edit")}</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => handleDelete(row.original.id)}
-                    className="text-red-600"
+                    className="cursor-pointer hover:bg-red-50 focus:bg-red-50 text-red-600"
                   >
                     <Trash className="mr-2 h-4 w-4" />
-                    {t("users.delete")}
+                    <span>{t("users.delete")}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
