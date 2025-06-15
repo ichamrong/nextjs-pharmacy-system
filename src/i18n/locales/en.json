@@ -59,7 +59,14 @@
     "backToSignIn": "Back to Sign In",
     "close": "Close",
     "reset": "Reset",
-    "apply": "Apply"
+    "apply": "Apply",
+    "unsavedChanges": {
+      "title": "Unsaved Changes",
+      "message": "You have unsaved changes. Are you sure you want to leave?"
+    },
+    "leave": "Leave",
+    "stay": "Stay",
+    "view": "View"
   },
   "resetPassword": {
     "title": "Reset Password",
@@ -250,7 +257,6 @@
     },
     "filters": "Filters",
     "filterDescription": "Select your filters to narrow down the results",
-    "selectCategory": "Select category",
     "selectStatus": "Select status",
     "view": "View",
     "lastUpdated": "Last Updated",
@@ -271,7 +277,6 @@
       "allCategories": "All Categories"
     },
     "productInformation": "Product Information",
-    "description": "Description",
     "descriptionPlaceholder": "Enter product description",
     "viewDescription": "View detailed information about this product"
   },
@@ -344,23 +349,59 @@
   },
   "categories": {
     "title": "Categories",
-    "add": "Add Category",
+    "description": "Manage your product categories",
+    "addNew": "Add Category",
+    "addDescription": "Add a new category to your inventory",
     "edit": "Edit Category",
+    "editDescription": "Update category information",
     "name": "Name",
-    "description": "Description",
-    "createdAt": "Created At",
-    "updatedAt": "Updated At",
-    "actions": "Actions",
-    "save": "Save",
-    "cancel": "Cancel",
-    "create": "Create",
-    "delete": "Delete",
-    "deleteConfirm": "Are you sure you want to delete this category?",
-    "deleteSuccess": "Category deleted successfully",
-    "createSuccess": "Category created successfully",
-    "updateSuccess": "Category updated successfully",
-    "nameRequired": "Name is required",
-    "descriptionRequired": "Description is required"
+    "namePlaceholder": "Enter category name",
+    "descriptionPlaceholder": "Enter category description",
+    "status": {
+      "label": "Status"
+    },
+    "selectStatus": "Select status",
+    "statusTypes": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "productCount": "Products",
+    "lastUpdated": "Last Updated",
+    "searchPlaceholder": "Search categories...",
+    "createSuccess": {
+      "title": "Success",
+      "message": "Category has been created successfully"
+    },
+    "createError": {
+      "title": "Error",
+      "message": "Failed to create category. Please try again."
+    },
+    "updateSuccess": {
+      "title": "Success",
+      "message": "Category has been updated successfully"
+    },
+    "updateError": {
+      "title": "Error",
+      "message": "Failed to update category"
+    },
+    "fetchError": {
+      "title": "Error",
+      "message": "Failed to fetch category information"
+    },
+    "deleteConfirm": {
+      "title": "Delete Category",
+      "message": "Are you sure you want to delete this category? This action cannot be undone."
+    },
+    "deleteSuccess": {
+      "title": "Success",
+      "message": "Category has been deleted successfully"
+    },
+    "deleteError": {
+      "title": "Error",
+      "message": "Failed to delete category"
+    },
+    "view": "View Category",
+    "viewDescription": "View category details and settings"
   },
   "navigation": {
     "dashboard": "Dashboard",
